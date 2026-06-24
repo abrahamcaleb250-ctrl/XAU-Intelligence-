@@ -49,6 +49,7 @@ hr {
 
 .bullish-fill {
     width: 72%;
-    height: 100%;
-    background-color: green;
+    height: 30px;
+    background: #00ff66;
+    border-radius: 50px;
 }
