@@ -55,3 +55,8 @@ hr {
     background: #00ff66;
     border-radius: 50px;
 }
+.bearish-fill {
+    width: 28%;
+    height: 30px;
+    background: red;
+}
