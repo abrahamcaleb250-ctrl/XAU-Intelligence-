@@ -47,6 +47,9 @@ hr {
     background-color: #222;
     border-radius: 50px;
     overflow: hidden;
+    display: flex;
+    padding: 0;
+    border: none;
 }
 
 .bullish-fill {
