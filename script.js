@@ -1,33 +1,18 @@
-// ====================================
-// XAU Intelligence AI Brain v1.0
-// ====================================
+// =====================================
+// XAU Intelligence AI Brain v2.0
+// =====================================
 
-console.log("XAU Intelligence Loaded");
+console.log("XAU Intelligence Started");
 
 // ---------------------------
 // Trend Data (Temporary)
 // ---------------------------
 
 const trendData = {
-    h4: {
-        bullish: 72,
-        bearish: 28
-    },
-
-    h1: {
-        bullish: 72,
-        bearish: 28
-    },
-
-    m15: {
-        bullish: 72,
-        bearish: 28
-    },
-
-    m5: {
-        bullish: 72,
-        bearish: 28
-    }
+    h4: { bullish: 72, bearish: 28 },
+    h1: { bullish: 72, bearish: 28 },
+    m15: { bullish: 72, bearish: 28 },
+    m5: { bullish: 72, bearish: 28 }
 };
 
 // ---------------------------
@@ -44,24 +29,49 @@ function calculateMasterBias() {
 
     const bearish = 100 - bullish;
 
+    let direction = "NEUTRAL";
+
+    if (bullish >= 60) {
+        direction = "BULLISH";
+    } else if (bearish >= 60) {
+        direction = "BEARISH";
+    }
+
     return {
-        bullish: bullish,
-        bearish: bearish
+        bullish,
+        bearish,
+        direction
+    };
+}
+
+// ---------------------------
+// AI Signal Engine
+// ---------------------------
+
+function generateSignal(masterBias) {
+
+    if (masterBias.direction === "BULLISH") {
+        return {
+            signal: "BUY",
+            confidence: masterBias.bullish
+        };
+    }
+
+    if (masterBias.direction === "BEARISH") {
+        return {
+            signal: "SELL",
+            confidence: masterBias.bearish
+        };
+    }
+
+    return {
+        signal: "WAIT",
+        confidence: 50
     };
 }
 
 const masterBias = calculateMasterBias();
+const aiSignal = generateSignal(masterBias);
 
-console.log("Master Bias:", masterBias);
-
-// ---------------------------
-// AI Signal
-// ---------------------------
-
-const aiSignal = {
-    signal: "BUY",
-    confidence: 87,
-    status: "ACTIVE"
-};
-
-console.log("AI Signal:", aiSignal);
+console.log(masterBias);
+console.log(aiSignal);
