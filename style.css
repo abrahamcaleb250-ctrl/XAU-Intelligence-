@@ -41,6 +41,19 @@ hr {
     border: 1px solid #222;
 }
 
+/* Bullish / Bearish Header */
+.trend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    font-size: 16px;
+}
+
+.trend-header span {
+    font-weight: bold;
+}
+
 /* Trend meter */
 .meter {
     display: flex;
