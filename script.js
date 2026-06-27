@@ -77,14 +77,14 @@ console.log(masterBias);
 console.log(aiSignal);
 
 // =====================================
-// Create Timeframe Buttons
+// Timeframe Buttons
 // =====================================
 
-const chartSection = document.getElementById("timeframe-buttons");
+const buttonContainer = document.getElementById("timeframe-buttons");
 
 const timeframes = ["4H", "1H", "15M", "5M"];
 
-timeframes.forEach(timeframe => {
+timeframes.forEach((timeframe, index) => {
 
     const button = document.createElement("button");
 
@@ -92,6 +92,23 @@ timeframes.forEach(timeframe => {
 
     button.className = "timeframe-btn";
 
-    chartSection.appendChild(button);
+    // Default active button
+    if (index === 0) {
+        button.classList.add("active-timeframe");
+    }
+
+    button.addEventListener("click", function () {
+
+        document.querySelectorAll(".timeframe-btn").forEach(btn => {
+            btn.classList.remove("active-timeframe");
+        });
+
+        button.classList.add("active-timeframe");
+
+        console.log("Current Timeframe:", timeframe);
+
+    });
+
+    buttonContainer.appendChild(button);
 
 });
