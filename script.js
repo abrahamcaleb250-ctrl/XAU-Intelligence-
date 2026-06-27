@@ -75,3 +75,23 @@ const aiSignal = generateSignal(masterBias);
 
 console.log(masterBias);
 console.log(aiSignal);
+
+// =====================================
+// Create Timeframe Buttons
+// =====================================
+
+const chartSection = document.getElementById("timeframe-buttons");
+
+const timeframes = ["4H", "1H", "15M", "5M"];
+
+timeframes.forEach(timeframe => {
+
+    const button = document.createElement("button");
+
+    button.innerText = timeframe;
+
+    button.className = "timeframe-btn";
+
+    chartSection.appendChild(button);
+
+});
