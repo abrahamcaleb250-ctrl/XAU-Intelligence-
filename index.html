@@ -266,10 +266,28 @@
 
     <h2>🤖 AI Signal Panel</h2>
 
-    <div>
-        <p>No Signal Yet</p>
-    </div>
-    <script src="script.js"></script>
+<div id="ai-signal-panel" class="signal-card">
+
+    <h3 id="signal-type">⏳ WAIT</h3>
+
+    <p>
+        <strong>Confidence:</strong>
+        <span id="signal-confidence">0%</span>
+    </p>
+
+    <p>
+        <strong>Market Bias:</strong>
+        <span id="market-bias">Loading...</span>
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        <span id="signal-status">Scanning Market...</span>
+    </p>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
