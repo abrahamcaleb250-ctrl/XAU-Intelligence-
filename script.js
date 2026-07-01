@@ -57,7 +57,13 @@ timeframes: {
 
     m5: {
 
-    trend: {},
+    trend: {
+
+    direction: "UNKNOWN",
+
+    strength: 0
+
+},
 
     trendChange: {}
 
