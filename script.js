@@ -43,7 +43,13 @@ timeframes: {
 
     m15: {
 
-    trend: {},
+    trend: {
+
+    direction: "UNKNOWN",
+
+    strength: 0
+
+},
 
     trendChange: {}
 
