@@ -117,11 +117,12 @@ const trendData = {
 
 function calculateMasterBias() {
 
+    // Weighted Trend Voting
     const bullish =
-        (trendData.h4.bullish +
-        trendData.h1.bullish +
-        trendData.m15.bullish +
-        trendData.m5.bullish) / 4;
+        (trendData.h4.bullish * 0.40) +
+        (trendData.h1.bullish * 0.30) +
+        (trendData.m15.bullish * 0.20) +
+        (trendData.m5.bullish * 0.10);
 
     const bearish = 100 - bullish;
 
@@ -134,12 +135,16 @@ function calculateMasterBias() {
     }
 
     return {
-        bullish,
-        bearish,
-        direction
-    };
-}
 
+        bullish: Math.round(bullish),
+
+        bearish: Math.round(bearish),
+
+        direction
+
+    };
+
+}
 // ---------------------------
 // AI Signal Engine
 // ---------------------------
