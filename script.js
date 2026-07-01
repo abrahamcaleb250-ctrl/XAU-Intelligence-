@@ -10,8 +10,18 @@ console.log("XAU Intelligence Started");
 
 const AI = {
 
-    // Trend Analysis
-    trend: {},
+    // Timeframe Brain
+timeframes: {
+
+    h4: {},
+
+    h1: {},
+
+    m15: {},
+
+    m5: {}
+
+},
 
     // Market Structure
     structure: {},
