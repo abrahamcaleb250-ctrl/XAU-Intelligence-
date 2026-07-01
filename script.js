@@ -21,7 +21,13 @@ timeframes: {
 
 },
 
-    h1: {},
+    h1: {
+
+    trend: {},
+
+    trendChange: {}
+
+},
 
     m15: {},
 
