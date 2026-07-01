@@ -29,7 +29,13 @@ timeframes: {
 
     h1: {
 
-    trend: {},
+    trend: {
+
+    direction: "UNKNOWN",
+
+    strength: 0
+
+},
 
     trendChange: {}
 
