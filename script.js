@@ -15,7 +15,13 @@ timeframes: {
 
     h4: {
 
-    trend: {},
+    trend: {
+
+    direction: "UNKNOWN",
+
+    strength: 0
+
+},
 
     trendChange: {}
 
