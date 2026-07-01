@@ -13,7 +13,13 @@ const AI = {
     // Timeframe Brain
 timeframes: {
 
-    h4: {},
+    h4: {
+
+    trend: {},
+
+    trendChange: {}
+
+},
 
     h1: {},
 
