@@ -37,7 +37,13 @@ timeframes: {
 
 },
 
-    m5: {}
+    m5: {
+
+    trend: {},
+
+    trendChange: {}
+
+},
 
 },
 
