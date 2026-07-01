@@ -151,24 +151,56 @@ function calculateMasterBias() {
 
 function generateSignal(masterBias) {
 
+    let marketState = "SCANNING";
+
     if (masterBias.direction === "BULLISH") {
+
+        marketState = "TRENDING BULLISH";
+
         return {
+
             signal: "BUY",
-            confidence: masterBias.bullish
+
+            confidence: masterBias.bullish,
+
+            marketState: marketState,
+
+            status: "Waiting for confirmations..."
+
         };
+
     }
 
     if (masterBias.direction === "BEARISH") {
+
+        marketState = "TRENDING BEARISH";
+
         return {
+
             signal: "SELL",
-            confidence: masterBias.bearish
+
+            confidence: masterBias.bearish,
+
+            marketState: marketState,
+
+            status: "Waiting for confirmations..."
+
         };
+
     }
 
     return {
+
         signal: "WAIT",
-        confidence: 50
+
+        confidence: 50,
+
+        marketState: "RANGING",
+
+        status: "Monitoring market..."
+
     };
+
 }
 
 const masterBias = calculateMasterBias();
