@@ -250,3 +250,23 @@ timeframes.forEach((timeframe, index) => {
     buttonContainer.appendChild(button);
 
 });
+
+// =====================================
+// Update AI Signal Panel
+// =====================================
+
+if (document.getElementById("signal-type")) {
+
+    document.getElementById("signal-type").innerText =
+        aiSignal.signal;
+
+    document.getElementById("signal-confidence").innerText =
+        aiSignal.confidence + "%";
+
+    document.getElementById("market-bias").innerText =
+        masterBias.direction;
+
+    document.getElementById("signal-status").innerText =
+        aiSignal.status;
+
+}
