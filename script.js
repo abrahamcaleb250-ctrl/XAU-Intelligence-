@@ -207,7 +207,6 @@ const masterBias = calculateMasterBias();
 const aiSignal = generateSignal(masterBias);
 
 // Store inside AI Engine
-AI.trend.masterBias = masterBias;
 AI.signal.current = aiSignal;
 
 console.log(masterBias);
@@ -220,53 +219,52 @@ console.log(AI);
 
 const buttonContainer = document.getElementById("timeframe-buttons");
 
-const timeframes = ["4H", "1H", "15M", "5M"];
+if (buttonContainer) {
 
-timeframes.forEach((timeframe, index) => {
+    const timeframes = ["4H", "1H", "15M", "5M"];
 
-    const button = document.createElement("button");
+    timeframes.forEach((timeframe, index) => {
 
-    button.innerText = timeframe;
+        const button = document.createElement("button");
 
-    button.className = "timeframe-btn";
+        button.innerText = timeframe;
 
-    // Default active button
-    if (index === 0) {
-        button.classList.add("active-timeframe");
-    }
+        button.className = "timeframe-btn";
 
-    button.addEventListener("click", function () {
+        if (index === 0) {
+            button.classList.add("active-timeframe");
+        }
 
-        document.querySelectorAll(".timeframe-btn").forEach(btn => {
-            btn.classList.remove("active-timeframe");
+        button.addEventListener("click", function () {
+
+            document.querySelectorAll(".timeframe-btn").forEach(btn => {
+                btn.classList.remove("active-timeframe");
+            });
+
+            button.classList.add("active-timeframe");
+
         });
 
-        button.classList.add("active-timeframe");
-
-        console.log("Current Timeframe:", timeframe);
+        buttonContainer.appendChild(button);
 
     });
 
-    buttonContainer.appendChild(button);
-
-});
+}
 
 // =====================================
 // Update AI Signal Panel
 // =====================================
 
-if (document.getElementById("signal-type")) {
+const signalType = document.getElementById("signal-type");
+const signalConfidence = document.getElementById("signal-confidence");
+const marketBias = document.getElementById("market-bias");
+const signalStatus = document.getElementById("signal-status");
 
-    document.getElementById("signal-type").innerText =
-        aiSignal.signal;
+if (signalType && signalConfidence && marketBias && signalStatus) {
 
-    document.getElementById("signal-confidence").innerText =
-        aiSignal.confidence + "%";
-
-    document.getElementById("market-bias").innerText =
-        masterBias.direction;
-
-    document.getElementById("signal-status").innerText =
-        aiSignal.status;
+    signalType.innerText = aiSignal.signal;
+    signalConfidence.innerText = aiSignal.confidence + "%";
+    marketBias.innerText = masterBias.direction;
+    signalStatus.innerText = aiSignal.status;
 
 }
