@@ -270,7 +270,7 @@ if (signalType && signalConfidence && marketBias && signalStatus) {
 
     signalType.innerText = aiSignal.signal;
     signalConfidence.innerText = aiSignal.confidence + "%";
-    marketBias.innerText = masterBias.direction;
+    marketBias.innerText = aiSignal.trend;
     signalStatus.innerText = aiSignal.status;
 
 }
