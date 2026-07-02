@@ -159,13 +159,15 @@ function generateSignal(masterBias) {
 
         return {
 
-            signal: "BUY",
+            trend: "BULLISH",
+
+            signal: "WAIT",
 
             confidence: masterBias.bullish,
 
             marketState: marketState,
 
-            status: "Waiting for confirmations..."
+            status: "Waiting for setup..."
 
         };
 
@@ -177,19 +179,23 @@ function generateSignal(masterBias) {
 
         return {
 
-            signal: "SELL",
+            trend: "BEARISH",
+
+            signal: "WAIT",
 
             confidence: masterBias.bearish,
 
             marketState: marketState,
 
-            status: "Waiting for confirmations..."
+            status: "Waiting for setup..."
 
         };
 
     }
 
     return {
+
+        trend: "RANGING",
 
         signal: "WAIT",
 
