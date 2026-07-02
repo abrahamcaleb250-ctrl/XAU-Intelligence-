@@ -72,7 +72,24 @@ timeframes: {
 },
 
     // Market Structure
-    structure: {},
+    // Market Structure
+structure: {
+
+    bos: {
+        detected: false,
+        direction: "NONE"
+    },
+
+    choch: {
+        detected: false,
+        direction: "NONE"
+    },
+
+    trendState: "UNKNOWN",
+
+    lastStructure: null
+
+},
 
     // Liquidity Analysis
     liquidity: {},
