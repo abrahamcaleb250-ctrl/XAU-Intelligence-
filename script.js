@@ -169,7 +169,10 @@ function calculateMasterBias() {
 // AI Signal Engine
 // ---------------------------
 
-function generateSignal(masterBias) {
+// ---------------------------
+// AI Signal Engine
+// ---------------------------
+
 function generateSignal(masterBias) {
 
     let marketState = "SCANNING";
@@ -230,11 +233,34 @@ function generateSignal(masterBias) {
 
 }
 
+// ---------------------------
+// Market Structure Engine
+// ---------------------------
+
 function analyzeMarketStructure(masterBias) {
 
     AI.structure.trendState = masterBias.direction;
 
-    AI.structure.bos
+    return AI.structure;
+
+}
+
+const masterBias = calculateMasterBias();
+
+const marketStructure = analyzeMarketStructure(masterBias);
+
+const aiSignal = generateSignal(masterBias);
+
+AI.structure.current = marketStructure;
+
+AI.signal.current = aiSignal;
+
+console.log(masterBias);
+console.log(marketStructure);
+console.log(aiSignal);
+console.log(AI);
+
+}
 
 // =====================================
 // Timeframe Buttons
