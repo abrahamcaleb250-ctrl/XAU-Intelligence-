@@ -71,8 +71,7 @@ timeframes: {
 
 },
 
-    // Market Structure
-    // Market Structure
+// Market Structure
 structure: {
 
     bos: {
@@ -86,6 +85,10 @@ structure: {
     },
 
     trendState: "UNKNOWN",
+
+    trendChanged: false,
+
+    trendChangePoint: null,
 
     lastStructure: null
 
