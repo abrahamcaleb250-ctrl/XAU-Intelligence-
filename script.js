@@ -10,116 +10,192 @@ console.log("XAU Intelligence Started");
 
 const AI = {
 
+    // =========================
     // Timeframe Brain
-timeframes: {
+    // =========================
+    timeframes: {
 
-    h4: {
+        h4: {
+            trend: {
+                direction: "UNKNOWN",
+                strength: 0
+            },
+            trendChange: {}
+        },
 
-    trend: {
+        h1: {
+            trend: {
+                direction: "UNKNOWN",
+                strength: 0
+            },
+            trendChange: {}
+        },
 
-    direction: "UNKNOWN",
+        m15: {
+            trend: {
+                direction: "UNKNOWN",
+                strength: 0
+            },
+            trendChange: {}
+        },
 
-    strength: 0
+        m5: {
+            trend: {
+                direction: "UNKNOWN",
+                strength: 0
+            },
+            trendChange: {}
+        }
 
-},
-
-    trendChange: {}
-
-},
-
-    h1: {
-
-    trend: {
-
-    direction: "UNKNOWN",
-
-    strength: 0
-
-},
-
-    trendChange: {}
-
-},
-
-    m15: {
-
-    trend: {
-
-    direction: "UNKNOWN",
-
-    strength: 0
-
-},
-
-    trendChange: {}
-
-},
-
-    m5: {
-
-    trend: {
-
-    direction: "UNKNOWN",
-
-    strength: 0
-
-},
-
-    trendChange: {}
-
-},
-
-},
-
-// Market Structure
-structure: {
-
-    bos: {
-        detected: false,
-        direction: "NONE"
     },
 
-    choch: {
-        detected: false,
-        direction: "NONE"
+    // =========================
+    // Market Structure
+    // =========================
+    structure: {
+
+        trendState: "UNKNOWN",
+
+        trendChanged: false,
+
+        trendChangePoint: null,
+
+        structureStrength: 0,
+
+        lastStructure: null,
+
+        previousTrend: "UNKNOWN",
+
+        bos: {
+            detected: false,
+            direction: "NONE",
+            price: null,
+            timeframe: null,
+            candle: null,
+            time: null
+        },
+
+        choch: {
+            detected: false,
+            direction: "NONE",
+            price: null,
+            timeframe: null,
+            candle: null,
+            time: null
+        },
+
+        swingHigh: {
+            price: null,
+            timeframe: null,
+            candle: null
+        },
+
+        swingLow: {
+            price: null,
+            timeframe: null,
+            candle: null
+        }
+
     },
 
-    trendState: "UNKNOWN",
-
-    trendChanged: false,
-
-    trendChangePoint: null,
-
-    lastStructure: null
-
-},
-
+    // =========================
     // Liquidity Analysis
-    liquidity: {},
+    // =========================
+    liquidity: {
 
+        buySideTaken: false,
+
+        sellSideTaken: false,
+
+        equalHighs: [],
+
+        equalLows: [],
+
+        sweepPrice: null,
+
+        sweepTime: null,
+
+        sweepDirection: "NONE"
+
+    },
+
+    // =========================
     // Entry Zones
-    entryZones: {},
+    // =========================
+    entryZones: {
 
+        fvg: {
+            detected: false,
+            direction: "NONE",
+            top: null,
+            bottom: null
+        },
+
+        orderBlock: {
+            detected: false,
+            direction: "NONE",
+            price: null
+        },
+
+        supply: {
+            detected: false,
+            top: null,
+            bottom: null
+        },
+
+        demand: {
+            detected: false,
+            top: null,
+            bottom: null
+        }
+
+    },
+
+    // =========================
     // Candlestick Confirmation
-    candlesticks: {},
+    // =========================
+    candlesticks: {
 
+        bullishEngulfing: false,
+
+        bearishEngulfing: false,
+
+        pinBar: false,
+
+        insideBar: false,
+
+        confirmation: false,
+
+        pattern: "NONE"
+
+    },
+
+    // =========================
     // Risk Management
+    // =========================
     risk: {},
 
+    // =========================
     // Final AI Signal
+    // =========================
     signal: {},
 
+    // =========================
     // Trade Management
+    // =========================
     trade: {},
 
+    // =========================
     // Browser Notifications
+    // =========================
     notifications: {},
 
+    // =========================
     // Trade Journal
+    // =========================
     journal: {}
 
 };
-
 // ---------------------------
 // Trend Data (Temporary)
 // ---------------------------
