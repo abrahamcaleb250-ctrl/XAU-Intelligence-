@@ -169,10 +169,6 @@ function calculateMasterBias() {
 // AI Signal Engine
 // ---------------------------
 
-// ---------------------------
-// AI Signal Engine
-// ---------------------------
-
 function generateSignal(masterBias) {
 
     let marketState = "SCANNING";
@@ -182,17 +178,11 @@ function generateSignal(masterBias) {
         marketState = "TRENDING BULLISH";
 
         return {
-
             trend: "BULLISH",
-
             signal: "WAIT",
-
             confidence: masterBias.bullish,
-
             marketState: marketState,
-
             status: "Waiting for setup..."
-
         };
 
     }
@@ -202,33 +192,21 @@ function generateSignal(masterBias) {
         marketState = "TRENDING BEARISH";
 
         return {
-
             trend: "BEARISH",
-
             signal: "WAIT",
-
             confidence: masterBias.bearish,
-
             marketState: marketState,
-
             status: "Waiting for setup..."
-
         };
 
     }
 
     return {
-
         trend: "RANGING",
-
         signal: "WAIT",
-
         confidence: 50,
-
         marketState: "RANGING",
-
         status: "Monitoring market..."
-
     };
 
 }
@@ -252,15 +230,12 @@ const marketStructure = analyzeMarketStructure(masterBias);
 const aiSignal = generateSignal(masterBias);
 
 AI.structure.current = marketStructure;
-
 AI.signal.current = aiSignal;
 
 console.log(masterBias);
 console.log(marketStructure);
 console.log(aiSignal);
 console.log(AI);
-
-}
 
 // =====================================
 // Timeframe Buttons
