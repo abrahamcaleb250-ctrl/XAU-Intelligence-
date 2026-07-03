@@ -167,6 +167,7 @@ function calculateMasterBias() {
 // ---------------------------
 
 function generateSignal(masterBias) {
+function generateSignal(masterBias) {
 
     let marketState = "SCANNING";
 
@@ -226,15 +227,11 @@ function generateSignal(masterBias) {
 
 }
 
-const masterBias = calculateMasterBias();
-const aiSignal = generateSignal(masterBias);
+function analyzeMarketStructure(masterBias) {
 
-// Store inside AI Engine
-AI.signal.current = aiSignal;
+    AI.structure.trendState = masterBias.direction;
 
-console.log(masterBias);
-console.log(aiSignal);
-console.log(AI);
+    AI.structure.bos
 
 // =====================================
 // Timeframe Buttons
