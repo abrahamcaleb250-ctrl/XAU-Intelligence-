@@ -434,7 +434,29 @@ function buildCandles() {
 
     if (AI.marketData.ticks.length === 0) return;
 
-    // Candle Engine will be built here
+    const ticks = AI.marketData.ticks;
+
+    const firstTick = ticks[0];
+
+    const lastTick = ticks[ticks.length - 1];
+
+    const candle = {
+
+        open: firstTick.price,
+
+        high: Math.max(...ticks.map(tick => tick.price)),
+
+        low: Math.min(...ticks.map(tick => tick.price)),
+
+        close: lastTick.price,
+
+        startTime: firstTick.time,
+
+        endTime: lastTick.time
+
+    };
+
+    AI.marketData.candles.m5 = [candle];
 
 }
 
