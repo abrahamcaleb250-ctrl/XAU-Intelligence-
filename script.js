@@ -339,6 +339,25 @@ console.log(masterBias);
 console.log(marketStructure);
 console.log(aiSignal);
 console.log(AI);
+// =====================================
+// Live Price Engine
+// =====================================
+
+const PriceEngine = {
+
+    running: false,
+
+    interval: 5000,
+
+    source: "LIVE",
+
+    currentPrice: 0,
+
+    lastPrice: 0,
+
+    lastUpdate: null
+
+};
 
 // =====================================
 // Timeframe Buttons
