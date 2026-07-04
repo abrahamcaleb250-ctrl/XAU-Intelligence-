@@ -426,6 +426,17 @@ function startPriceEngine() {
 }
 
 startPriceEngine();
+// =====================================
+// Candle Builder Engine
+// =====================================
+
+function buildCandles() {
+
+    if (AI.marketData.ticks.length === 0) return;
+
+    // Candle Engine will be built here
+
+}
 
 // =====================================
 // Timeframe Buttons
