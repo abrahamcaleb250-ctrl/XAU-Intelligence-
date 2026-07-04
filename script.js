@@ -383,11 +383,19 @@ async function fetchLivePrice() {
 
         AI.marketData.priceHistory.push({
 
-            price: data.spot_usd_oz,
+    price: data.spot_usd_oz,
 
-            time: Date.now()
+    time: Date.now()
 
-        });
+});
+
+AI.marketData.ticks.push({
+
+    price: data.spot_usd_oz,
+
+    time: Date.now()
+
+});
 
         console.log("Live Price:", data.spot_usd_oz);
 
