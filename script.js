@@ -396,6 +396,7 @@ AI.marketData.ticks.push({
     time: Date.now()
 
 });
+        buildCandles();
 
         console.log("Live Price:", data.spot_usd_oz);
 
