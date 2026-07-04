@@ -360,6 +360,20 @@ const PriceEngine = {
 };
 
 // =====================================
+// Start Price Engine
+// =====================================
+
+function startPriceEngine() {
+
+    PriceEngine.running = true;
+
+    console.log("Price Engine Started");
+
+}
+
+startPriceEngine();
+
+// =====================================
 // Timeframe Buttons
 // =====================================
 
