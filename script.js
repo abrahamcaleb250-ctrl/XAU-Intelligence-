@@ -349,7 +349,7 @@ const PriceEngine = {
 
     interval: 5000,
 
-    source: "LIVE",
+    source: "XAUS",
 
     currentPrice: 0,
 
@@ -360,12 +360,58 @@ const PriceEngine = {
 };
 
 // =====================================
+// Fetch Live XAU Price
+// =====================================
+
+async function fetchLivePrice() {
+
+    try {
+
+        const res = await fetch("https://xaus.com/api/v1/spot");
+
+        const data = await res.json();
+
+        PriceEngine.lastPrice = PriceEngine.currentPrice;
+
+        PriceEngine.currentPrice = data.spot_usd_oz;
+
+        PriceEngine.lastUpdate = new Date();
+
+        AI.marketData.livePrice = data.spot_usd_oz;
+
+        AI.marketData.lastPrice = PriceEngine.lastPrice;
+
+        AI.marketData.priceHistory.push({
+
+            price: data.spot_usd_oz,
+
+            time: Date.now()
+
+        });
+
+        console.log("Live Price:", data.spot_usd_oz);
+
+    }
+
+    catch (error) {
+
+        console.log("Price Engine Error:", error);
+
+    }
+
+}
+
+// =====================================
 // Start Price Engine
 // =====================================
 
 function startPriceEngine() {
 
     PriceEngine.running = true;
+
+    fetchLivePrice();
+
+    setInterval(fetchLivePrice, PriceEngine.interval);
 
     console.log("Price Engine Started");
 
