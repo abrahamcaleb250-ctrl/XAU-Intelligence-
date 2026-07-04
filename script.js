@@ -193,8 +193,35 @@ const AI = {
     // =========================
     // Trade Journal
     // =========================
-    journal: {}
+    journal: {},
 
+    // =========================
+    // Market Data Engine
+    // =========================
+    marketData: {
+
+        livePrice: 0,
+
+        lastPrice: 0,
+
+        priceHistory: [],
+
+        ticks: [],
+
+        candles: {
+
+            m5: [],
+
+            m15: [],
+
+            h1: [],
+
+            h4: []
+
+        }
+
+    }
+    
 };
 // ---------------------------
 // Trend Data (Temporary)
