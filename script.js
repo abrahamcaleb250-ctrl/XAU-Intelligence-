@@ -423,6 +423,8 @@ async function fetchLivePrice() {
 
 function startPriceEngine() {
 
+    if (PriceEngine.running) return;
+
     PriceEngine.running = true;
 
     fetchLivePrice();
