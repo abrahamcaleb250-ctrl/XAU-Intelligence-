@@ -441,6 +441,10 @@ function buildCandles() {
 
     const lastTick = ticks[ticks.length - 1];
 
+    const now = Date.now();
+
+    const FIVE_MINUTES = 5 * 60 * 1000;
+
     const candle = {
 
         open: firstTick.price,
@@ -459,13 +463,14 @@ function buildCandles() {
 
     if (AI.marketData.candles.m5.length === 0) {
 
-    AI.marketData.candles.m5.push(candle);
+        AI.marketData.candles.m5.push(candle);
 
-} else {
+    } else {
 
-    AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
+        AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
 
-}
+    }
+
 }
 
 // =====================================
