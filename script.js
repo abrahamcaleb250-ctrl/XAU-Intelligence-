@@ -594,6 +594,98 @@ async function fetchLivePrice() {
 
 }
 // =====================================
+// Liquidity Detection Engine
+// =====================================
+
+function detectLiquidity() {
+
+    const candles = AI.marketData.candles.m5;
+
+    if (candles.length < 10) return;
+
+    const latest = candles[candles.length - 1];
+
+    // -------------------------
+    // Equal High Detection
+    // -------------------------
+
+    for (let i = candles.length - 10; i < candles.length - 1; i++) {
+
+        if (Math.abs(candles[i].high - latest.high) <= 0.20) {
+
+            AI.liquidity.equalHighs.push({
+
+                price: latest.high,
+
+                time: latest.endTime
+
+            });
+
+        }
+
+    }
+
+    // -------------------------
+    // Equal Low Detection
+    // -------------------------
+
+    for (let i = candles.length - 10; i < candles.length - 1; i++) {
+
+        if (Math.abs(candles[i].low - latest.low) <= 0.20) {
+
+            AI.liquidity.equalLows.push({
+
+                price: latest.low,
+
+                time: latest.endTime
+
+            });
+
+        }
+
+    }
+
+    // -------------------------
+    // Buy-side Sweep
+    // -------------------------
+
+    if (
+
+        AI.structure.swingHigh.detected &&
+        latest.high > AI.structure.swingHigh.price
+
+    ) {
+
+        AI.liquidity.buySideTaken = true;
+        AI.liquidity.sweepDetected = true;
+        AI.liquidity.sweepDirection = "BUY";
+        AI.liquidity.sweepPrice = latest.high;
+        AI.liquidity.sweepTime = latest.endTime;
+
+    }
+
+    // -------------------------
+    // Sell-side Sweep
+    // -------------------------
+
+    if (
+
+        AI.structure.swingLow.detected &&
+        latest.low < AI.structure.swingLow.price
+
+    ) {
+
+        AI.liquidity.sellSideTaken = true;
+        AI.liquidity.sweepDetected = true;
+        AI.liquidity.sweepDirection = "SELL";
+        AI.liquidity.sweepPrice = latest.low;
+        AI.liquidity.sweepTime = latest.endTime;
+
+    }
+
+}
+
+// =====================================
 // Start Price Engine
 // =====================================
 
@@ -605,7 +697,13 @@ function startPriceEngine() {
 
     fetchLivePrice();
 
-    setInterval(fetchLivePrice, PriceEngine.interval);
+    setInterval(() => {
+
+        fetchLivePrice();
+
+        detectLiquidity();
+
+    }, PriceEngine.interval);
 
     console.log("Price Engine Started");
 
