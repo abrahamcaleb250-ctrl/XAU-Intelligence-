@@ -470,12 +470,32 @@ function buildCandles() {
 
     };
 
+    // Create first candle
     if (AI.marketData.candles.m5.length === 0) {
 
         AI.marketData.candles.m5.push(candle);
 
+        return;
+
+    }
+
+    const current = AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1];
+
+    // If 5 minutes have passed, start a new candle
+    if ((now - current.startTime) >= FIVE_MINUTES) {
+
+        AI.marketData.candles.m5.push(candle);
+
+        // Keep only the latest 500 candles
+        if (AI.marketData.candles.m5.length > 500) {
+
+            AI.marketData.candles.m5.shift();
+
+        }
+
     } else {
 
+        // Update current candle
         AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
 
     }
