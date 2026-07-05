@@ -331,25 +331,17 @@ function analyzeMarketStructure(masterBias) {
     if (
 
         AI.structure.swingHigh.detected &&
-
         lastPrice > AI.structure.swingHigh.price
 
     ) {
 
         AI.structure.bos.detected = true;
-
         AI.structure.bos.direction = "BULLISH";
-
         AI.structure.bos.price = lastPrice;
-
         AI.structure.bos.timeframe = "M5";
-
         AI.structure.bos.time = Date.now();
-
         AI.structure.bos.candle = AI.structure.swingHigh.candle;
-
         AI.structure.bos.index = AI.structure.swingHigh.index;
-
         AI.structure.bos.strength = 100;
 
     }
@@ -361,28 +353,68 @@ function analyzeMarketStructure(masterBias) {
     if (
 
         AI.structure.swingLow.detected &&
-
         lastPrice < AI.structure.swingLow.price
 
     ) {
 
         AI.structure.bos.detected = true;
-
         AI.structure.bos.direction = "BEARISH";
-
         AI.structure.bos.price = lastPrice;
-
         AI.structure.bos.timeframe = "M5";
-
         AI.structure.bos.time = Date.now();
-
         AI.structure.bos.candle = AI.structure.swingLow.candle;
-
         AI.structure.bos.index = AI.structure.swingLow.index;
-
         AI.structure.bos.strength = 100;
 
     }
+
+    // ==========================
+    // Bullish CHOCH
+    // ==========================
+
+    if (
+
+        AI.structure.previousTrend === "BEARISH" &&
+        AI.structure.swingHigh.detected &&
+        lastPrice > AI.structure.swingHigh.price
+
+    ) {
+
+        AI.structure.choch.detected = true;
+        AI.structure.choch.direction = "BULLISH";
+        AI.structure.choch.price = lastPrice;
+        AI.structure.choch.timeframe = "M5";
+        AI.structure.choch.time = Date.now();
+        AI.structure.choch.candle = AI.structure.swingHigh.candle;
+        AI.structure.choch.index = AI.structure.swingHigh.index;
+        AI.structure.choch.confirmed = true;
+
+    }
+
+    // ==========================
+    // Bearish CHOCH
+    // ==========================
+
+    if (
+
+        AI.structure.previousTrend === "BULLISH" &&
+        AI.structure.swingLow.detected &&
+        lastPrice < AI.structure.swingLow.price
+
+    ) {
+
+        AI.structure.choch.detected = true;
+        AI.structure.choch.direction = "BEARISH";
+        AI.structure.choch.price = lastPrice;
+        AI.structure.choch.timeframe = "M5";
+        AI.structure.choch.time = Date.now();
+        AI.structure.choch.candle = AI.structure.swingLow.candle;
+        AI.structure.choch.index = AI.structure.swingLow.index;
+        AI.structure.choch.confirmed = true;
+
+    }
+
+    AI.structure.previousTrend = AI.structure.trendState;
 
     return AI.structure;
 
@@ -399,11 +431,8 @@ AI.structure.current = marketStructure;
 AI.signal.current = aiSignal;
 
 console.log(masterBias);
-
 console.log(marketStructure);
-
 console.log(aiSignal);
-
 console.log(AI);
 // =====================================
 // Live Price Engine
