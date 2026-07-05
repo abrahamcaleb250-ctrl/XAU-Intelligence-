@@ -329,10 +329,8 @@ function analyzeMarketStructure(masterBias) {
     // ==========================
 
     if (
-
         AI.structure.swingHigh.detected &&
         lastPrice > AI.structure.swingHigh.price
-
     ) {
 
         AI.structure.bos.detected = true;
@@ -351,10 +349,8 @@ function analyzeMarketStructure(masterBias) {
     // ==========================
 
     if (
-
         AI.structure.swingLow.detected &&
         lastPrice < AI.structure.swingLow.price
-
     ) {
 
         AI.structure.bos.detected = true;
@@ -373,11 +369,9 @@ function analyzeMarketStructure(masterBias) {
     // ==========================
 
     if (
-
         AI.structure.previousTrend === "BEARISH" &&
         AI.structure.swingHigh.detected &&
         lastPrice > AI.structure.swingHigh.price
-
     ) {
 
         AI.structure.choch.detected = true;
@@ -396,11 +390,9 @@ function analyzeMarketStructure(masterBias) {
     // ==========================
 
     if (
-
         AI.structure.previousTrend === "BULLISH" &&
         AI.structure.swingLow.detected &&
         lastPrice < AI.structure.swingLow.price
-
     ) {
 
         AI.structure.choch.detected = true;
@@ -414,7 +406,41 @@ function analyzeMarketStructure(masterBias) {
 
     }
 
-    AI.structure.previousTrend = AI.structure.trendState;
+    // ==========================
+    // Trend Engine
+    // ==========================
+
+    if (
+        AI.structure.bos.detected &&
+        AI.structure.bos.direction === "BULLISH"
+    ) {
+
+        AI.structure.currentTrend = "BULLISH";
+        AI.structure.structureStrength = AI.structure.bos.strength;
+
+    }
+
+    if (
+        AI.structure.bos.detected &&
+        AI.structure.bos.direction === "BEARISH"
+    ) {
+
+        AI.structure.currentTrend = "BEARISH";
+        AI.structure.structureStrength = AI.structure.bos.strength;
+
+    }
+
+    if (
+        AI.structure.choch.detected
+    ) {
+
+        AI.structure.trendChanged = true;
+        AI.structure.trendChangePoint = AI.structure.choch.price;
+        AI.structure.currentTrend = AI.structure.choch.direction;
+
+    }
+
+    AI.structure.previousTrend = AI.structure.currentTrend;
 
     return AI.structure;
 
