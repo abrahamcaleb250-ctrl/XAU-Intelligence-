@@ -493,10 +493,60 @@ function buildCandles() {
 
         }
 
+        detectSwings();
+
     } else {
 
         // Update current candle
         AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
+
+    }
+
+}
+
+// =====================================
+// Swing Detection Engine
+// =====================================
+
+function detectSwings() {
+
+    const candles = AI.marketData.candles.m5;
+
+    if (candles.length < 5) return;
+
+    const i = candles.length - 3;
+
+    const left = candles[i - 1];
+    const current = candles[i];
+    const right = candles[i + 1];
+
+    // Swing High
+    if (
+        current.high > left.high &&
+        current.high > right.high
+    ) {
+
+        AI.structure.swingHigh.detected = true;
+        AI.structure.swingHigh.price = current.high;
+        AI.structure.swingHigh.candle = current;
+        AI.structure.swingHigh.time = current.endTime;
+        AI.structure.swingHigh.index = i;
+        AI.structure.swingHigh.timeframe = "M5";
+
+    }
+
+    // Swing Low
+    if (
+        current.low < left.low &&
+        current.low < right.low
+    ) {
+
+        AI.structure.swingLow.detected = true;
+        AI.structure.swingLow.price = current.low;
+        AI.structure.swingLow.candle = current;
+        AI.structure.swingLow.time = current.endTime;
+        AI.structure.swingLow.index = i;
+        AI.structure.swingLow.timeframe = "M5";
 
     }
 
