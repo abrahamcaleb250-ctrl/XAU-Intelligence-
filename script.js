@@ -97,27 +97,82 @@ const AI = {
         }
 
     },
+    
+// =========================
+// Liquidity Analysis
+// =========================
+liquidity: {
 
-    // =========================
-    // Liquidity Analysis
-    // =========================
-    liquidity: {
+    // Buy Side Liquidity
+    buySideTaken: false,
 
-        buySideTaken: false,
+    // Sell Side Liquidity
+    sellSideTaken: false,
 
-        sellSideTaken: false,
+    // Equal Highs
+    equalHighs: [],
 
-        equalHighs: [],
+    // Equal Lows
+    equalLows: [],
 
-        equalLows: [],
+    // Liquidity Sweep
+    sweepDetected: false,
 
-        sweepPrice: null,
+    sweepPrice: null,
 
-        sweepTime: null,
+    sweepTime: null,
 
-        sweepDirection: "NONE"
+    sweepDirection: "NONE",
+
+    sweepStrength: 0,
+
+    // Stop Hunt
+    stopHuntDetected: false,
+
+    stopHuntDirection: "NONE",
+
+    stopHuntPrice: null,
+
+    stopHuntTime: null,
+
+    // Premium / Discount
+    premiumZone: {
+
+        active: false,
+
+        top: null,
+
+        bottom: null
 
     },
+
+    discountZone: {
+
+        active: false,
+
+        top: null,
+
+        bottom: null
+
+    },
+
+    // Liquidity History
+    history: [],
+
+    // Last Liquidity Event
+    lastEvent: {
+
+        type: "NONE",
+
+        direction: "NONE",
+
+        price: null,
+
+        time: null
+
+    }
+
+},
 
     // =========================
     // Entry Zones
