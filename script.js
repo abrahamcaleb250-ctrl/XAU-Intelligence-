@@ -383,19 +383,27 @@ async function fetchLivePrice() {
 
         AI.marketData.priceHistory.push({
 
-    price: data.spot_usd_oz,
+            price: data.spot_usd_oz,
 
-    time: Date.now()
+            time: Date.now()
 
-});
+        });
 
-AI.marketData.ticks.push({
+        AI.marketData.ticks.push({
 
-    price: data.spot_usd_oz,
+            price: data.spot_usd_oz,
 
-    time: Date.now()
+            time: Date.now()
 
-});
+        });
+
+        // Keep only the latest 500 ticks
+        if (AI.marketData.ticks.length > 500) {
+
+            AI.marketData.ticks.shift();
+
+        }
+
         buildCandles();
 
         console.log("Live Price:", data.spot_usd_oz);
@@ -409,7 +417,6 @@ AI.marketData.ticks.push({
     }
 
 }
-
 // =====================================
 // Start Price Engine
 // =====================================
