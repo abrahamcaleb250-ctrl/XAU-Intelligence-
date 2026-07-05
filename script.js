@@ -322,6 +322,68 @@ function analyzeMarketStructure(masterBias) {
 
     AI.structure.trendState = masterBias.direction;
 
+    const lastPrice = AI.marketData.livePrice;
+
+    // ==========================
+    // Bullish BOS
+    // ==========================
+
+    if (
+
+        AI.structure.swingHigh.detected &&
+
+        lastPrice > AI.structure.swingHigh.price
+
+    ) {
+
+        AI.structure.bos.detected = true;
+
+        AI.structure.bos.direction = "BULLISH";
+
+        AI.structure.bos.price = lastPrice;
+
+        AI.structure.bos.timeframe = "M5";
+
+        AI.structure.bos.time = Date.now();
+
+        AI.structure.bos.candle = AI.structure.swingHigh.candle;
+
+        AI.structure.bos.index = AI.structure.swingHigh.index;
+
+        AI.structure.bos.strength = 100;
+
+    }
+
+    // ==========================
+    // Bearish BOS
+    // ==========================
+
+    if (
+
+        AI.structure.swingLow.detected &&
+
+        lastPrice < AI.structure.swingLow.price
+
+    ) {
+
+        AI.structure.bos.detected = true;
+
+        AI.structure.bos.direction = "BEARISH";
+
+        AI.structure.bos.price = lastPrice;
+
+        AI.structure.bos.timeframe = "M5";
+
+        AI.structure.bos.time = Date.now();
+
+        AI.structure.bos.candle = AI.structure.swingLow.candle;
+
+        AI.structure.bos.index = AI.structure.swingLow.index;
+
+        AI.structure.bos.strength = 100;
+
+    }
+
     return AI.structure;
 
 }
@@ -333,11 +395,15 @@ const marketStructure = analyzeMarketStructure(masterBias);
 const aiSignal = generateSignal(masterBias);
 
 AI.structure.current = marketStructure;
+
 AI.signal.current = aiSignal;
 
 console.log(masterBias);
+
 console.log(marketStructure);
+
 console.log(aiSignal);
+
 console.log(AI);
 // =====================================
 // Live Price Engine
