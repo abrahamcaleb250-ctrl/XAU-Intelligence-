@@ -457,8 +457,15 @@ function buildCandles() {
 
     };
 
-    AI.marketData.candles.m5 = [candle];
+    if (AI.marketData.candles.m5.length === 0) {
 
+    AI.marketData.candles.m5.push(candle);
+
+} else {
+
+    AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
+
+}
 }
 
 // =====================================
