@@ -174,37 +174,145 @@ liquidity: {
 
 },
 
-    // =========================
-    // Entry Zones
-    // =========================
-    entryZones: {
+// =========================
+// Entry Zones
+// =========================
+entryZones: {
 
-        fvg: {
-            detected: false,
-            direction: "NONE",
-            top: null,
-            bottom: null
-        },
+    // Fair Value Gap
+    fvg: {
 
-        orderBlock: {
-            detected: false,
-            direction: "NONE",
-            price: null
-        },
-
-        supply: {
-            detected: false,
-            top: null,
-            bottom: null
-        },
-
-        demand: {
-            detected: false,
-            top: null,
-            bottom: null
-        }
+        detected: false,
+        direction: "NONE",
+        top: null,
+        bottom: null,
+        midpoint: null,
+        filled: false,
+        timeframe: null,
+        strength: 0,
+        candle: null,
+        time: null
 
     },
+
+    // Inverse Fair Value Gap
+    ifvg: {
+
+        detected: false,
+        direction: "NONE",
+        top: null,
+        bottom: null,
+        midpoint: null,
+        timeframe: null,
+        candle: null,
+        time: null
+
+    },
+
+    // Order Block
+    orderBlock: {
+
+        detected: false,
+        direction: "NONE",
+        price: null,
+        high: null,
+        low: null,
+        mitigated: false,
+        strength: 0,
+        timeframe: null,
+        candle: null,
+        time: null
+
+    },
+
+    // Breaker Block
+    breakerBlock: {
+
+        detected: false,
+        direction: "NONE",
+        top: null,
+        bottom: null,
+        strength: 0,
+        timeframe: null,
+        candle: null,
+        time: null
+
+    },
+
+    // Supply Zone
+    supply: {
+
+        detected: false,
+        top: null,
+        bottom: null,
+        strength: 0,
+        touched: false,
+        broken: false
+
+    },
+
+    // Demand Zone
+    demand: {
+
+        detected: false,
+        top: null,
+        bottom: null,
+        strength: 0,
+        touched: false,
+        broken: false
+
+    },
+
+    // Support
+    support: {
+
+        detected: false,
+        price: null,
+        touches: 0,
+        strength: 0,
+        broken: false
+
+    },
+
+    // Resistance
+    resistance: {
+
+        detected: false,
+        price: null,
+        touches: 0,
+        strength: 0,
+        broken: false
+
+    },
+
+    // Premium Zone
+    premium: {
+
+        active: false,
+        top: null,
+        bottom: null
+
+    },
+
+    // Discount Zone
+    discount: {
+
+        active: false,
+        top: null,
+        bottom: null
+
+    },
+
+    // Entry Quality
+    entryReady: false,
+
+    bestEntry: "NONE",
+
+    confluenceScore: 0,
+
+    history: []
+
+},
 
     // =========================
     // Candlestick Confirmation
