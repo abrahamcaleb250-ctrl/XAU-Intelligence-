@@ -568,12 +568,99 @@ function detectEntryZones() {
 }
 
 // ---------------------------
+// Candlestick Detection Engine
+// ---------------------------
+
+function detectCandlestickPatterns() {
+
+    const candles = AI.marketData.candles.m5;
+
+    if (candles.length < 3) return;
+
+    const current = candles[candles.length - 1];
+    const previous = candles[candles.length - 2];
+
+    // Reset
+    AI.candlesticks.pattern = "NONE";
+    AI.candlesticks.confirmation = false;
+    AI.candlesticks.strength = 0;
+    AI.candlesticks.direction = "NONE";
+
+    // ==========================
+    // Bullish Engulfing
+    // ==========================
+
+    if (
+
+        previous.close < previous.open &&
+        current.close > current.open &&
+        current.open < previous.close &&
+        current.close > previous.open
+
+    ) {
+
+        AI.candlesticks.bullishEngulfing = true;
+        AI.candlesticks.pattern = "BULLISH_ENGULFING";
+        AI.candlesticks.direction = "BULLISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 95;
+
+    }
+
+    // ==========================
+    // Bearish Engulfing
+    // ==========================
+
+    if (
+
+        previous.close > previous.open &&
+        current.close < current.open &&
+        current.open > previous.close &&
+        current.close < previous.open
+
+    ) {
+
+        AI.candlesticks.bearishEngulfing = true;
+        AI.candlesticks.pattern = "BEARISH_ENGULFING";
+        AI.candlesticks.direction = "BEARISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 95;
+
+    }
+
+    // ==========================
+    // Doji
+    // ==========================
+
+    if (
+
+        Math.abs(current.open - current.close) <=
+        ((current.high - current.low) * 0.10)
+
+    ) {
+
+        AI.candlesticks.doji = true;
+        AI.candlesticks.pattern = "DOJI";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 60;
+
+    }
+
+    AI.candlesticks.time = current.endTime;
+    AI.candlesticks.candle = current;
+    AI.candlesticks.timeframe = "M5";
+
+}
+
+// ---------------------------
 // AI Signal Engine
 // ---------------------------
 
 function generateSignal(masterBias) {
 
     detectEntryZones();
+
+    detectCandlestickPatterns();
 
     let marketState = "SCANNING";
 
@@ -582,11 +669,17 @@ function generateSignal(masterBias) {
         marketState = "TRENDING BULLISH";
 
         return {
+
             trend: "BULLISH",
+
             signal: "WAIT",
+
             confidence: masterBias.bullish,
+
             marketState,
+
             status: "Waiting for setup..."
+
         };
 
     }
@@ -596,21 +689,33 @@ function generateSignal(masterBias) {
         marketState = "TRENDING BEARISH";
 
         return {
+
             trend: "BEARISH",
+
             signal: "WAIT",
+
             confidence: masterBias.bearish,
+
             marketState,
+
             status: "Waiting for setup..."
+
         };
 
     }
 
     return {
+
         trend: "RANGING",
+
         signal: "WAIT",
+
         confidence: 50,
+
         marketState: "RANGING",
+
         status: "Monitoring market..."
+
     };
 
 }
