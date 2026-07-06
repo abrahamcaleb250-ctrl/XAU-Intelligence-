@@ -382,10 +382,89 @@ candlesticks: {
 
 },
 
-    // =========================
-    // Risk Management
-    // =========================
-    risk: {},
+// =========================
+// Risk Management
+// =========================
+risk: {
+
+    // Risk Settings
+    riskPercent: 1,
+
+    maxRiskPercent: 2,
+
+    riskRewardRatio: 3,
+
+    // Account
+    accountBalance: 0,
+
+    accountEquity: 0,
+
+    accountFreeMargin: 0,
+
+    // Position Size
+    lotSize: 0,
+
+    dynamicLot: true,
+
+    // Stop Loss
+    stopLoss: {
+
+        price: null,
+
+        pips: 0,
+
+        dynamic: true
+
+    },
+
+    // Take Profit
+    takeProfit: {
+
+        price: null,
+
+        pips: 0,
+
+        dynamic: true
+
+    },
+
+    // Trade Statistics
+    totalTrades: 0,
+
+    winningTrades: 0,
+
+    losingTrades: 0,
+
+    winRate: 0,
+
+    // Protection
+    maxDailyLoss: 3,
+
+    maxDailyTrades: 5,
+
+    maxConsecutiveLosses: 3,
+
+    dailyLossCount: 0,
+
+    dailyTradeCount: 0,
+
+    consecutiveLosses: 0,
+
+    tradingLocked: false,
+
+    // Drawdown
+    currentDrawdown: 0,
+
+    maxDrawdown: 10,
+
+    // Trade Status
+    tradeOpen: false,
+
+    currentTrade: null,
+
+    history: []
+
+},
 
     // =========================
     // Final AI Signal
