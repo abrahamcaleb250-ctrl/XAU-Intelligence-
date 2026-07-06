@@ -432,10 +432,99 @@ function calculateMasterBias() {
 
 }
 // ---------------------------
+// Entry Zone Detection Engine
+// ---------------------------
+
+function detectEntryZones() {
+
+    const candles = AI.marketData.candles.m5;
+
+    if (candles.length < 5) return;
+
+    const current = candles[candles.length - 1];
+    const previous = candles[candles.length - 2];
+    const third = candles[candles.length - 3];
+
+    // ==========================
+    // Fair Value Gap (FVG)
+    // ==========================
+
+    if (third.high < current.low) {
+
+        AI.entryZones.fvg.detected = true;
+        AI.entryZones.fvg.direction = "BULLISH";
+        AI.entryZones.fvg.top = current.low;
+        AI.entryZones.fvg.bottom = third.high;
+        AI.entryZones.fvg.midpoint =
+            (current.low + third.high) / 2;
+        AI.entryZones.fvg.time = current.endTime;
+        AI.entryZones.fvg.candle = current;
+
+    }
+
+    if (third.low > current.high) {
+
+        AI.entryZones.fvg.detected = true;
+        AI.entryZones.fvg.direction = "BEARISH";
+        AI.entryZones.fvg.top = third.low;
+        AI.entryZones.fvg.bottom = current.high;
+        AI.entryZones.fvg.midpoint =
+            (third.low + current.high) / 2;
+        AI.entryZones.fvg.time = current.endTime;
+        AI.entryZones.fvg.candle = current;
+
+    }
+
+    // ==========================
+    // Order Block
+    // ==========================
+
+    if (AI.structure.bos.detected) {
+
+        AI.entryZones.orderBlock.detected = true;
+        AI.entryZones.orderBlock.direction =
+            AI.structure.bos.direction;
+        AI.entryZones.orderBlock.price = previous.close;
+        AI.entryZones.orderBlock.high = previous.high;
+        AI.entryZones.orderBlock.low = previous.low;
+        AI.entryZones.orderBlock.candle = previous;
+        AI.entryZones.orderBlock.time = previous.endTime;
+
+    }
+
+    // ==========================
+    // Support
+    // ==========================
+
+    if (AI.structure.swingLow.detected) {
+
+        AI.entryZones.support.detected = true;
+        AI.entryZones.support.price =
+            AI.structure.swingLow.price;
+
+    }
+
+    // ==========================
+    // Resistance
+    // ==========================
+
+    if (AI.structure.swingHigh.detected) {
+
+        AI.entryZones.resistance.detected = true;
+        AI.entryZones.resistance.price =
+            AI.structure.swingHigh.price;
+
+    }
+
+}
+
+// ---------------------------
 // AI Signal Engine
 // ---------------------------
 
 function generateSignal(masterBias) {
+
+    detectEntryZones();
 
     let marketState = "SCANNING";
 
@@ -447,7 +536,7 @@ function generateSignal(masterBias) {
             trend: "BULLISH",
             signal: "WAIT",
             confidence: masterBias.bullish,
-            marketState: marketState,
+            marketState,
             status: "Waiting for setup..."
         };
 
@@ -461,7 +550,7 @@ function generateSignal(masterBias) {
             trend: "BEARISH",
             signal: "WAIT",
             confidence: masterBias.bearish,
-            marketState: marketState,
+            marketState,
             status: "Waiting for setup..."
         };
 
