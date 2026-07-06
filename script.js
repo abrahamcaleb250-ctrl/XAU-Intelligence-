@@ -538,10 +538,83 @@ signal: {
 
 },
 
-    // =========================
-    // Trade Management
-    // =========================
-    trade: {},
+// =========================
+// Trade Management
+// =========================
+trade: {
+
+    // Trade Status
+    active: false,
+
+    ticket: null,
+
+    direction: "NONE",
+
+    status: "IDLE", // IDLE | OPEN | CLOSED
+
+    // Entry
+    entryPrice: null,
+
+    entryTime: null,
+
+    // Stop Loss & Take Profit
+    stopLoss: null,
+
+    takeProfit: null,
+
+    // Current Market
+    currentPrice: null,
+
+    currentProfit: 0,
+
+    currentPips: 0,
+
+    // Break Even
+    breakEvenEnabled: true,
+
+    breakEvenTriggered: false,
+
+    breakEvenPrice: null,
+
+    // Trailing Stop
+    trailingStopEnabled: true,
+
+    trailingStopPrice: null,
+
+    trailingDistance: 0,
+
+    // Partial Take Profit
+    partialTPEnabled: true,
+
+    partialTP1Hit: false,
+
+    partialTP2Hit: false,
+
+    partialTP3Hit: false,
+
+    // Trade Timing
+    tradeDuration: 0,
+
+    maxTradeDuration: 0,
+
+    // Exit
+    exitPrice: null,
+
+    exitTime: null,
+
+    exitReason: "NONE",
+
+    result: "PENDING", // WIN | LOSS | BREAKEVEN | PENDING
+
+    // Statistics
+    highestProfit: 0,
+
+    lowestDrawdown: 0,
+
+    // History
+    history: []
+
+},
 
     // =========================
     // Browser Notifications
