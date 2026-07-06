@@ -616,11 +616,6 @@ trade: {
 
 },
 
-    // =========================
-    // Browser Notifications
-    // =========================
-    notifications: {},
-
 // =========================
 // Browser Notifications
 // =========================
@@ -687,6 +682,11 @@ notifications: {
     history: []
 
 },
+
+// =========================
+// Trade Journal
+// =========================
+journal: {},
 
     // =========================
     // Market Data Engine
