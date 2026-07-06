@@ -314,24 +314,73 @@ entryZones: {
 
 },
 
-    // =========================
-    // Candlestick Confirmation
-    // =========================
-    candlesticks: {
+// =========================
+// Candlestick Confirmation
+// =========================
+candlesticks: {
 
-        bullishEngulfing: false,
+    // Engulfing
+    bullishEngulfing: false,
 
-        bearishEngulfing: false,
+    bearishEngulfing: false,
 
-        pinBar: false,
+    // Pin Bars
+    bullishPinBar: false,
 
-        insideBar: false,
+    bearishPinBar: false,
 
-        confirmation: false,
+    // Hammer Family
+    hammer: false,
 
-        pattern: "NONE"
+    invertedHammer: false,
 
-    },
+    shootingStar: false,
+
+    hangingMan: false,
+
+    // Star Patterns
+    morningStar: false,
+
+    eveningStar: false,
+
+    doji: false,
+
+    // Multi-Candle Patterns
+    insideBar: false,
+
+    outsideBar: false,
+
+    threeWhiteSoldiers: false,
+
+    threeBlackCrows: false,
+
+    tweezerTop: false,
+
+    tweezerBottom: false,
+
+    // Rejection
+    bullishRejection: false,
+
+    bearishRejection: false,
+
+    // Confirmation
+    confirmation: false,
+
+    pattern: "NONE",
+
+    strength: 0,
+
+    direction: "NONE",
+
+    timeframe: null,
+
+    candle: null,
+
+    time: null,
+
+    history: []
+
+},
 
     // =========================
     // Risk Management
