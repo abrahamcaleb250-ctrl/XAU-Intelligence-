@@ -686,7 +686,153 @@ notifications: {
 // =========================
 // Trade Journal
 // =========================
-journal: {},
+journal: {
+
+    // Trade Records
+    trades: [],
+
+    // Daily Journal
+    daily: {
+
+        date: null,
+
+        tradesTaken: 0,
+
+        wins: 0,
+
+        losses: 0,
+
+        profit: 0,
+
+        notes: "",
+
+        lesson: "",
+
+        screenshots: []
+
+    },
+
+    // Weekly Journal
+    weekly: {
+
+        week: null,
+
+        tradesTaken: 0,
+
+        wins: 0,
+
+        losses: 0,
+
+        profit: 0,
+
+        notes: "",
+
+        lesson: ""
+
+    },
+
+    // Monthly Journal
+    monthly: {
+
+        month: null,
+
+        tradesTaken: 0,
+
+        wins: 0,
+
+        losses: 0,
+
+        profit: 0,
+
+        notes: "",
+
+        lesson: ""
+
+    },
+
+    // Discipline Checklist
+    discipline: {
+
+        followedPlan: false,
+
+        waitedForConfirmation: false,
+
+        respectedRisk: false,
+
+        noRevengeTrade: false,
+
+        noFOMO: false,
+
+        journalCompleted: false,
+
+        psychologyGood: false
+
+    },
+
+    // Discipline Streak
+    streak: {
+
+        current: 0,
+
+        best: 0,
+
+        lastCheckIn: null
+
+    },
+
+    // Performance
+    performance: {
+
+        winRate: 0,
+
+        profitFactor: 0,
+
+        averageRR: 0,
+
+        averageWin: 0,
+
+        averageLoss: 0
+
+    },
+
+    // Psychology
+    psychology: {
+
+        emotion: "CALM",
+
+        confidence: 0,
+
+        stress: 0,
+
+        mistakes: []
+
+    },
+
+    // Goals
+    goals: {
+
+        daily: "",
+
+        weekly: "",
+
+        monthly: ""
+
+    },
+
+    // AI Review
+    aiReview: {
+
+        completed: false,
+
+        score: 0,
+
+        feedback: "",
+
+        improvement: ""
+
+    }
+
+},
 
     // =========================
     // Market Data Engine
