@@ -621,10 +621,72 @@ trade: {
     // =========================
     notifications: {},
 
-    // =========================
-    // Trade Journal
-    // =========================
-    journal: {},
+// =========================
+// Browser Notifications
+// =========================
+notifications: {
+
+    enabled: true,
+
+    sound: true,
+
+    vibration: true,
+
+    desktop: true,
+
+    mobile: true,
+
+    // =====================
+    // Trade Signal Alerts
+    // =====================
+    tradeSignal: true,
+
+    entryConfirmation: true,
+
+    // =====================
+    // Risk Alerts
+    // =====================
+    riskWarning: true,
+
+    dailyLossWarning: true,
+
+    drawdownWarning: true,
+
+    // =====================
+    // Trade Management
+    // =====================
+    breakEvenAlert: true,
+
+    partialTakeProfitAlert: true,
+
+    trailingStopAlert: true,
+
+    tradeClosedAlert: true,
+
+    // =====================
+    // Journal & Discipline
+    // =====================
+    journalReminder: true,
+
+    disciplineReminder: true,
+
+    dailyReviewReminder: true,
+
+    weeklyReviewReminder: true,
+
+    // =====================
+    // News Alerts
+    // =====================
+    highImpactNewsAlert: true,
+
+    newsCooldownAlert: true,
+
+    // =====================
+    // Notification History
+    // =====================
+    history: []
+
+},
 
     // =========================
     // Market Data Engine
