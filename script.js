@@ -466,10 +466,77 @@ risk: {
 
 },
 
-    // =========================
-    // Final AI Signal
-    // =========================
-    signal: {},
+// =========================
+// Final AI Signal
+// =========================
+signal: {
+
+    // Final Decision
+    action: "WAIT", // BUY | SELL | WAIT
+
+    confidence: 0,
+
+    tradeGrade: "NONE", // A+, A, B, C
+
+    // Market Context
+    trend: "UNKNOWN",
+
+    marketState: "SCANNING",
+
+    timeframe: "M5",
+
+    session: "NONE",
+
+    // Entry
+    entryPrice: null,
+
+    entryType: "NONE", // MARKET | LIMIT
+
+    // Risk
+    stopLoss: null,
+
+    takeProfit: null,
+
+    riskReward: 0,
+
+    lotSize: 0,
+
+    // AI Scores
+    confluenceScore: 0,
+
+    structureScore: 0,
+
+    liquidityScore: 0,
+
+    entryScore: 0,
+
+    candlestickScore: 0,
+
+    riskScore: 0,
+
+    // Confirmation
+    confirmation: false,
+
+    confirmationCount: 0,
+
+    // Reasons
+    reasons: [],
+
+    warnings: [],
+
+    // Timing
+    generatedTime: null,
+
+    validUntil: null,
+
+    // Trade Status
+    executed: false,
+
+    result: "PENDING", // WIN | LOSS | BREAKEVEN | PENDING
+
+    history: []
+
+},
 
     // =========================
     // Trade Management
