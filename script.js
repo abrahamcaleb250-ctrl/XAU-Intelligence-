@@ -897,7 +897,6 @@ sessions: {
 
     },
 
-    // AI Filters
     tradingAllowed: true,
 
     preferredSession: "LONDON_NEWYORK",
@@ -906,10 +905,44 @@ sessions: {
 
     sessionStrength: 0,
 
-    // Timing
     serverTime: null,
 
     countdown: null
+
+},
+
+// =========================
+// News Engine
+// =========================
+news: {
+
+    enabled: true,
+
+    highImpact: false,
+
+    mediumImpact: false,
+
+    lowImpact: false,
+
+    event: "",
+
+    currency: "USD",
+
+    impact: "NONE",
+
+    eventTime: null,
+
+    countdown: null,
+
+    tradingBlocked: false,
+
+    cooldownMinutes: 15,
+
+    cooldownActive: false,
+
+    lastNewsTime: null,
+
+    history: []
 
 },
 
