@@ -1632,6 +1632,35 @@ function detectTradingSession() {
     }
 
 }
+// =====================================
+// News Detection Engine
+// =====================================
+
+async function detectNews() {
+
+    try {
+
+        // Placeholder for future live News API
+
+        AI.news.highImpact = false;
+
+        AI.news.mediumImpact = false;
+
+        AI.news.lowImpact = false;
+
+        AI.news.tradingBlocked = false;
+
+        AI.news.cooldownActive = false;
+
+    }
+
+    catch (error) {
+
+        console.log("News Engine Error:", error);
+
+    }
+
+}
 
 // =====================================
 // Start Price Engine
@@ -1653,6 +1682,8 @@ function startPriceEngine() {
 
         detectTradingSession();
 
+        detectNews();
+
     }, PriceEngine.interval);
 
     console.log("Price Engine Started");
@@ -1660,6 +1691,7 @@ function startPriceEngine() {
 }
 
 startPriceEngine();
+
 // =====================================
 // Candle Builder Engine
 // =====================================
