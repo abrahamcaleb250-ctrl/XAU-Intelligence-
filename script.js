@@ -1328,6 +1328,8 @@ function analyzeMarketStructure(masterBias) {
         AI.structure.bos.index = AI.structure.swingHigh.index;
         AI.structure.bos.strength = 100;
 
+        AI.breakRetest.waitingForRetest = true;
+
     }
 
     // ==========================
@@ -1347,6 +1349,8 @@ function analyzeMarketStructure(masterBias) {
         AI.structure.bos.candle = AI.structure.swingLow.candle;
         AI.structure.bos.index = AI.structure.swingLow.index;
         AI.structure.bos.strength = 100;
+
+        AI.breakRetest.waitingForRetest = true;
 
     }
 
@@ -1369,6 +1373,8 @@ function analyzeMarketStructure(masterBias) {
         AI.structure.choch.index = AI.structure.swingHigh.index;
         AI.structure.choch.confirmed = true;
 
+        AI.breakRetest.waitingForRetest = true;
+
     }
 
     // ==========================
@@ -1389,6 +1395,8 @@ function analyzeMarketStructure(masterBias) {
         AI.structure.choch.candle = AI.structure.swingLow.candle;
         AI.structure.choch.index = AI.structure.swingLow.index;
         AI.structure.choch.confirmed = true;
+
+        AI.breakRetest.waitingForRetest = true;
 
     }
 
