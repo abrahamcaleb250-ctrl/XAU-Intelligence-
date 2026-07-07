@@ -1543,6 +1543,64 @@ function detectLiquidity() {
 }
 
 // =====================================
+// Trading Session Engine
+// =====================================
+
+function detectTradingSession() {
+
+    const now = new Date();
+
+    const hour = now.getUTCHours();
+
+    AI.sessions.serverTime = now.toISOString();
+
+    AI.sessions.asian.active = false;
+    AI.sessions.london.active = false;
+    AI.sessions.newYork.active = false;
+    AI.sessions.overlap.active = false;
+
+    if (hour >= 0 && hour < 8) {
+
+        AI.sessions.current = "ASIAN";
+        AI.sessions.asian.active = true;
+        AI.sessions.sessionStrength = 30;
+
+    }
+
+    else if (hour >= 8 && hour < 13) {
+
+        AI.sessions.current = "LONDON";
+        AI.sessions.london.active = true;
+        AI.sessions.sessionStrength = 80;
+
+    }
+
+    else if (hour >= 13 && hour < 17) {
+
+        AI.sessions.current = "LONDON_NEWYORK";
+        AI.sessions.overlap.active = true;
+        AI.sessions.sessionStrength = 100;
+
+    }
+
+    else if (hour >= 17 && hour < 22) {
+
+        AI.sessions.current = "NEW_YORK";
+        AI.sessions.newYork.active = true;
+        AI.sessions.sessionStrength = 75;
+
+    }
+
+    else {
+
+        AI.sessions.current = "CLOSED";
+        AI.sessions.sessionStrength = 10;
+
+    }
+
+}
+
+// =====================================
 // Start Price Engine
 // =====================================
 
@@ -1559,6 +1617,8 @@ function startPriceEngine() {
         fetchLivePrice();
 
         detectLiquidity();
+
+        detectTradingSession();
 
     }, PriceEngine.interval);
 
