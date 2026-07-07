@@ -1270,6 +1270,47 @@ function analyzeMarketStructure(masterBias) {
     const lastPrice = AI.marketData.livePrice;
 
     // ==========================
+    // Break & Retest Detection
+    // ==========================
+
+    if (AI.structure.bos.detected) {
+
+        if (
+
+            AI.structure.bos.direction === "BULLISH" &&
+            Math.abs(lastPrice - AI.structure.bos.price) <= 1
+
+        ) {
+
+            AI.breakRetest.detected = true;
+            AI.breakRetest.direction = "BULLISH";
+            AI.breakRetest.level = AI.structure.bos.price;
+            AI.breakRetest.retested = true;
+            AI.breakRetest.confirmed = true;
+            AI.breakRetest.time = Date.now();
+            AI.breakRetest.strength = 90;
+
+        }
+
+        if (
+
+            AI.structure.bos.direction === "BEARISH" &&
+            Math.abs(lastPrice - AI.structure.bos.price) <= 1
+
+        ) {
+
+            AI.breakRetest.detected = true;
+            AI.breakRetest.direction = "BEARISH";
+            AI.breakRetest.level = AI.structure.bos.price;
+            AI.breakRetest.retested = true;
+            AI.breakRetest.confirmed = true;
+            AI.breakRetest.time = Date.now();
+            AI.breakRetest.strength = 90;
+
+        }
+
+    }
+    // ==========================
     // Bullish BOS
     // ==========================
 
