@@ -1192,6 +1192,70 @@ function detectCandlestickPatterns() {
 }
 
 // ---------------------------
+// Entry Zone Engine
+// ---------------------------
+
+function detectEntryZones() {
+
+    AI.entryZones.entryReady = false;
+    AI.entryZones.bestEntry = "NONE";
+    AI.entryZones.confluenceScore = 0;
+
+    let score = 0;
+
+    if (AI.entryZones.fvg.detected) score += 10;
+    if (AI.entryZones.ifvg.detected) score += 10;
+    if (AI.entryZones.orderBlock.detected) score += 15;
+    if (AI.entryZones.breakerBlock.detected) score += 15;
+    if (AI.entryZones.supply.detected) score += 10;
+    if (AI.entryZones.demand.detected) score += 10;
+    if (AI.entryZones.support.detected) score += 10;
+    if (AI.entryZones.resistance.detected) score += 10;
+
+    if (AI.structure.bos.detected) score += 15;
+    if (AI.structure.choch.detected) score += 15;
+
+    if (
+        AI.breakRetest.detected &&
+        AI.breakRetest.confirmed
+    ) score += 20;
+
+    if (AI.candlesticks.confirmation) score += 20;
+
+    if (
+        AI.liquidity.buySideTaken ||
+        AI.liquidity.sellSideTaken
+    ) score += 10;
+
+    if (AI.sessions.sessionStrength >= 80) score += 10;
+
+    if (AI.news.tradingBlocked) score -= 100;
+
+    score = Math.max(0, Math.min(score, 100));
+
+    AI.entryZones.confluenceScore = score;
+
+    if (score >= 70) {
+
+        AI.entryZones.entryReady = true;
+
+        if (AI.structure.currentTrend === "BULLISH") {
+
+            AI.entryZones.bestEntry = "BUY";
+
+        }
+
+        else if (AI.structure.currentTrend === "BEARISH") {
+
+            AI.entryZones.bestEntry = "SELL";
+
+        }
+
+    }
+
+}
+
+// ---------------------------
 // AI Signal Engine
 // ---------------------------
 
@@ -1202,6 +1266,42 @@ function generateSignal(masterBias) {
     detectCandlestickPatterns();
 
     let marketState = "SCANNING";
+
+    if (AI.news.tradingBlocked) {
+
+        return {
+
+            trend: masterBias.direction,
+
+            signal: "AVOID",
+
+            confidence: 0,
+
+            marketState: "HIGH IMPACT NEWS",
+
+            status: "Trading blocked by News Filter."
+
+        };
+
+    }
+
+    if (AI.entryZones.entryReady) {
+
+        return {
+
+            trend: masterBias.direction,
+
+            signal: AI.entryZones.bestEntry,
+
+            confidence: AI.entryZones.confluenceScore,
+
+            marketState: "ENTRY READY",
+
+            status: "All confirmations aligned."
+
+        };
+
+    }
 
     if (masterBias.direction === "BULLISH") {
 
@@ -1217,7 +1317,7 @@ function generateSignal(masterBias) {
 
             marketState,
 
-            status: "Waiting for setup..."
+            status: "Waiting for bullish confirmation..."
 
         };
 
@@ -1237,7 +1337,7 @@ function generateSignal(masterBias) {
 
             marketState,
 
-            status: "Waiting for setup..."
+            status: "Waiting for bearish confirmation..."
 
         };
 
