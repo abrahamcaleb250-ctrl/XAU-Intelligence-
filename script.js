@@ -833,6 +833,85 @@ journal: {
     }
 
 },
+    
+// =========================
+// Trading Sessions
+// =========================
+sessions: {
+
+    current: "NONE",
+
+    previous: "NONE",
+
+    next: "NONE",
+
+    // Asian Session
+    asian: {
+
+        active: false,
+
+        open: "00:00",
+
+        close: "09:00",
+
+        volatility: "LOW"
+
+    },
+
+    // London Session
+    london: {
+
+        active: false,
+
+        open: "08:00",
+
+        close: "17:00",
+
+        volatility: "HIGH"
+
+    },
+
+    // New York Session
+    newYork: {
+
+        active: false,
+
+        open: "13:00",
+
+        close: "22:00",
+
+        volatility: "HIGH"
+
+    },
+
+    // London / New York Overlap
+    overlap: {
+
+        active: false,
+
+        open: "13:00",
+
+        close: "17:00",
+
+        volatility: "VERY_HIGH"
+
+    },
+
+    // AI Filters
+    tradingAllowed: true,
+
+    preferredSession: "LONDON_NEWYORK",
+
+    avoidLowLiquidity: true,
+
+    sessionStrength: 0,
+
+    // Timing
+    serverTime: null,
+
+    countdown: null
+
+},
 
     // =========================
     // Market Data Engine
