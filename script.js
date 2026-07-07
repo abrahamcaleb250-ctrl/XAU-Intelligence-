@@ -1400,9 +1400,9 @@ function analyzeMarketStructure(masterBias) {
 
     }
 
-    // ==========================
-    // Trend Engine
-    // ==========================
+// ==========================
+// Trend Engine
+// ==========================
 
     if (
         AI.structure.bos.detected &&
@@ -1424,15 +1424,53 @@ function analyzeMarketStructure(masterBias) {
 
     }
 
-    if (
-        AI.structure.choch.detected
-    ) {
+    // ==========================
+    // CHOCH Trend Shift
+    // ==========================
+
+    if (AI.structure.choch.detected) {
 
         AI.structure.trendChanged = true;
         AI.structure.trendChangePoint = AI.structure.choch.price;
         AI.structure.currentTrend = AI.structure.choch.direction;
 
     }
+
+    // ==========================
+    // Break & Retest Confirmation
+    // ==========================
+
+    if (
+        AI.breakRetest.detected &&
+        AI.breakRetest.confirmed
+    ) {
+
+        AI.structure.structureStrength += 15;
+
+    }
+
+    // ==========================
+    // Session Strength Filter
+    // ==========================
+
+    if (AI.sessions.sessionStrength >= 80) {
+
+        AI.structure.structureStrength += 10;
+
+    } else if (AI.sessions.sessionStrength <= 30) {
+
+        AI.structure.structureStrength -= 10;
+
+    }
+
+    // Keep strength between 0 and 100
+
+    AI.structure.structureStrength = Math.max(
+        0,
+        Math.min(100, AI.structure.structureStrength)
+    );
+
+    // Save previous trend
 
     AI.structure.previousTrend = AI.structure.currentTrend;
 
