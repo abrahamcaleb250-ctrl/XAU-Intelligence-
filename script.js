@@ -1120,10 +1120,21 @@ function detectCandlestickPatterns() {
     const previous = candles[candles.length - 2];
 
     // Reset
+
+    AI.candlesticks.bullishEngulfing = false;
+    AI.candlesticks.bearishEngulfing = false;
+    AI.candlesticks.pinBar = false;
+    AI.candlesticks.insideBar = false;
+    AI.candlesticks.doji = false;
+    AI.candlesticks.hammer = false;
+    AI.candlesticks.shootingStar = false;
+    AI.candlesticks.morningStar = false;
+    AI.candlesticks.eveningStar = false;
+
     AI.candlesticks.pattern = "NONE";
+    AI.candlesticks.direction = "NONE";
     AI.candlesticks.confirmation = false;
     AI.candlesticks.strength = 0;
-    AI.candlesticks.direction = "NONE";
 
     // ==========================
     // Bullish Engulfing
@@ -1161,6 +1172,126 @@ function detectCandlestickPatterns() {
 
         AI.candlesticks.bearishEngulfing = true;
         AI.candlesticks.pattern = "BEARISH_ENGULFING";
+        AI.candlesticks.direction = "BEARISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 95;
+
+    }
+
+    // ==========================
+    // Pin Bar
+    // ==========================
+
+    if (
+
+        (current.high - Math.max(current.open, current.close)) >
+        ((current.high - current.low) * 0.60)
+
+    ) {
+
+        AI.candlesticks.pinBar = true;
+        AI.candlesticks.pattern = "PIN_BAR";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 85;
+
+    }
+
+    // ==========================
+    // Inside Bar
+    // ==========================
+
+    if (
+
+        current.high < previous.high &&
+        current.low > previous.low
+
+    ) {
+
+        AI.candlesticks.insideBar = true;
+        AI.candlesticks.pattern = "INSIDE_BAR";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 80;
+
+    }
+
+    // ==========================
+    // Hammer
+    // ==========================
+
+    if (
+
+        (Math.min(current.open, current.close) - current.low) >
+        ((current.high - current.low) * 0.60)
+
+    ) {
+
+        AI.candlesticks.hammer = true;
+        AI.candlesticks.pattern = "HAMMER";
+        AI.candlesticks.direction = "BULLISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 90;
+
+    }
+
+    // ==========================
+    // Shooting Star
+    // ==========================
+
+    if (
+
+        (current.high - Math.max(current.open, current.close)) >
+        ((current.high - current.low) * 0.60)
+
+    ) {
+
+        AI.candlesticks.shootingStar = true;
+        AI.candlesticks.pattern = "SHOOTING_STAR";
+        AI.candlesticks.direction = "BEARISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 90;
+
+    }
+
+    // ==========================
+    // Morning Star
+    // ==========================
+
+    const c1 = candles[candles.length - 3];
+    const c2 = candles[candles.length - 2];
+    const c3 = candles[candles.length - 1];
+
+    if (
+
+        c1.close < c1.open &&
+        Math.abs(c2.close - c2.open) < ((c2.high - c2.low) * 0.30) &&
+        c3.close > c3.open &&
+        c3.close > ((c1.open + c1.close) / 2)
+
+    ) {
+
+        AI.candlesticks.morningStar = true;
+        AI.candlesticks.pattern = "MORNING_STAR";
+        AI.candlesticks.direction = "BULLISH";
+        AI.candlesticks.confirmation = true;
+        AI.candlesticks.strength = 95;
+
+    }
+
+    // ==========================
+    // Evening Star
+    // ==========================
+
+    if (
+
+        c1.close > c1.open &&
+        Math.abs(c2.close - c2.open) < ((c2.high - c2.low) * 0.30) &&
+        c3.close < c3.open &&
+        c3.close < ((c1.open + c1.close) / 2)
+
+    ) {
+
+        AI.candlesticks.eveningStar = true;
+        AI.candlesticks.pattern = "EVENING_STAR";
         AI.candlesticks.direction = "BEARISH";
         AI.candlesticks.confirmation = true;
         AI.candlesticks.strength = 95;
