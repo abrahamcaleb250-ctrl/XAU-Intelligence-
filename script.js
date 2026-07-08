@@ -466,6 +466,197 @@ risk: {
 
 },
 
+// --------------------------------------------------
+// Risk Management Engine
+// --------------------------------------------------
+
+function calculateRisk() {
+
+    if (!AI.entryZones.entryReady) return AI.risk;
+
+    AI.risk.tradeAllowed = true;
+    AI.risk.reason = "NONE";
+
+    // ==========================
+    // Entry
+    // ==========================
+
+    AI.risk.entryPrice = AI.marketData.livePrice;
+
+    // ==========================
+    // Stop Loss
+    // ==========================
+
+    if (AI.structure.currentTrend === "BULLISH") {
+
+        AI.risk.stopLoss.price =
+            AI.structure.swingLow.price;
+
+    }
+
+    if (AI.structure.currentTrend === "BEARISH") {
+
+        AI.risk.stopLoss.price =
+            AI.structure.swingHigh.price;
+
+    }
+
+    // ==========================
+    // Risk Distance
+    // ==========================
+
+    AI.risk.riskDistance = Math.abs(
+
+        AI.risk.entryPrice -
+        AI.risk.stopLoss.price
+
+    );
+
+    AI.risk.stopLoss.pips =
+        AI.risk.riskDistance;
+
+    // ==========================
+    // Take Profit
+    // ==========================
+
+    if (AI.structure.currentTrend === "BULLISH") {
+
+        AI.risk.takeProfit.price =
+
+            AI.risk.entryPrice +
+
+            (
+
+                AI.risk.riskDistance *
+
+                AI.risk.riskRewardRatio
+
+            );
+
+    }
+
+    if (AI.structure.currentTrend === "BEARISH") {
+
+        AI.risk.takeProfit.price =
+
+            AI.risk.entryPrice -
+
+            (
+
+                AI.risk.riskDistance *
+
+                AI.risk.riskRewardRatio
+
+            );
+
+    }
+
+    AI.risk.takeProfit.pips =
+
+        Math.abs(
+
+            AI.risk.takeProfit.price -
+
+            AI.risk.entryPrice
+
+        );
+
+    // ==========================
+    // Expected RR
+    // ==========================
+
+    AI.risk.expectedRR =
+        AI.risk.riskRewardRatio;
+
+    // ==========================
+    // Trade Quality
+    // ==========================
+
+    AI.risk.tradeQuality =
+
+        AI.entryZones.confluenceScore;
+
+    // ==========================
+    // Daily Loss Protection
+    // ==========================
+
+    if (
+
+        AI.risk.dailyLossCount >=
+        AI.risk.maxDailyLoss
+
+    ) {
+
+        AI.risk.tradeAllowed = false;
+
+        AI.risk.reason =
+            "MAX_DAILY_LOSS";
+
+    }
+
+    // ==========================
+    // Daily Trade Protection
+    // ==========================
+
+    if (
+
+        AI.risk.dailyTradeCount >=
+        AI.risk.maxDailyTrades
+
+    ) {
+
+        AI.risk.tradeAllowed = false;
+
+        AI.risk.reason =
+            "MAX_DAILY_TRADES";
+
+    }
+
+    // ==========================
+    // Consecutive Loss Protection
+    // ==========================
+
+    if (
+
+        AI.risk.consecutiveLosses >=
+
+        AI.risk.maxConsecutiveLosses
+
+    ) {
+
+        AI.risk.tradeAllowed = false;
+
+        AI.risk.reason =
+            "MAX_CONSECUTIVE_LOSSES";
+
+    }
+
+    // ==========================
+    // Drawdown Protection
+    // ==========================
+
+    if (
+
+        AI.risk.currentDrawdown >=
+
+        AI.risk.maxDrawdown
+
+    ) {
+
+        AI.risk.tradeAllowed = false;
+
+        AI.risk.reason =
+            "MAX_DRAWDOWN";
+
+    }
+
+    AI.risk.lastCalculation =
+        Date.now();
+
+    return AI.risk;
+
+}
+
 // =========================
 // Final AI Signal
 // =========================
