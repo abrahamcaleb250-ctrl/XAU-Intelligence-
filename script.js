@@ -938,6 +938,71 @@ journal: {
     }
 
 },
+
+// ---------------------------
+// Journal Engine
+// ---------------------------
+
+function updateJournal(trade) {
+
+    if (!trade) return;
+
+    const record = {
+
+        id: Date.now(),
+
+        direction: trade.direction,
+
+        entry: trade.entryPrice,
+
+        stopLoss: trade.stopLoss,
+
+        takeProfit: trade.takeProfit,
+
+        exit: trade.exitPrice,
+
+        result: trade.result,
+
+        profit: trade.currentProfit,
+
+        pips: trade.currentPips,
+
+        timeframe: "M5",
+
+        pattern: AI.candlesticks.pattern,
+
+        structure: AI.structure.currentTrend,
+
+        session: AI.sessions.current,
+
+        news: AI.news.currentImpact,
+
+        timestamp: Date.now()
+
+    };
+
+    AI.journal.history.push(record);
+
+    AI.journal.totalTrades = AI.journal.history.length;
+
+    if (trade.result === "WIN") {
+
+        AI.journal.wins++;
+
+    }
+
+    if (trade.result === "LOSS") {
+
+        AI.journal.losses++;
+
+    }
+
+    AI.journal.winRate =
+        AI.journal.totalTrades > 0
+            ? (AI.journal.wins / AI.journal.totalTrades) * 100
+            : 0;
+
+}
     
 // =========================
 // Trading Sessions
