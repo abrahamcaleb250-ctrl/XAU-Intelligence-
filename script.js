@@ -616,6 +616,111 @@ trade: {
 
 },
 
+// ---------------------------
+// Trade Management Engine
+// ---------------------------
+
+function manageTrade() {
+
+    if (!AI.trade.active) return;
+
+    AI.trade.currentPrice = AI.marketData.livePrice;
+
+    // ==========================
+    // Current Profit
+    // ==========================
+
+    if (AI.trade.direction === "BUY") {
+
+        AI.trade.currentPips =
+            AI.trade.currentPrice - AI.trade.entryPrice;
+
+    }
+
+    if (AI.trade.direction === "SELL") {
+
+        AI.trade.currentPips =
+            AI.trade.entryPrice - AI.trade.currentPrice;
+
+    }
+
+    AI.trade.currentProfit = AI.trade.currentPips;
+
+    // ==========================
+    // Highest Profit
+    // ==========================
+
+    if (AI.trade.currentProfit > AI.trade.highestProfit) {
+
+        AI.trade.highestProfit = AI.trade.currentProfit;
+
+    }
+
+    // ==========================
+    // Lowest Drawdown
+    // ==========================
+
+    if (AI.trade.currentProfit < AI.trade.lowestDrawdown) {
+
+        AI.trade.lowestDrawdown = AI.trade.currentProfit;
+
+    }
+
+    // ==========================
+    // Break Even
+    // ==========================
+
+    if (
+
+        AI.trade.breakEvenEnabled &&
+        !AI.trade.breakEvenTriggered &&
+        AI.trade.currentPips >= 20
+
+    ) {
+
+        AI.trade.breakEvenTriggered = true;
+        AI.trade.breakEvenPrice = AI.trade.entryPrice;
+
+    }
+
+    // ==========================
+    // Trailing Stop
+    // ==========================
+
+    if (
+
+        AI.trade.trailingStopEnabled &&
+        AI.trade.breakEvenTriggered
+
+    ) {
+
+        if (AI.trade.direction === "BUY") {
+
+            AI.trade.trailingStopPrice =
+                AI.trade.currentPrice -
+                AI.trade.trailingDistance;
+
+        }
+
+        if (AI.trade.direction === "SELL") {
+
+            AI.trade.trailingStopPrice =
+                AI.trade.currentPrice +
+                AI.trade.trailingDistance;
+
+        }
+
+    }
+
+    // ==========================
+    // Trade Duration
+    // ==========================
+
+    AI.trade.tradeDuration =
+        Date.now() - AI.trade.entryTime;
+
+}
+
 // =========================
 // Browser Notifications
 // =========================
