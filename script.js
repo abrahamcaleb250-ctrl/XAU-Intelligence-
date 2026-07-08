@@ -657,6 +657,72 @@ function calculateRisk() {
 
 }
 
+// --------------------------------------------------
+// Risk Runtime Engine
+// --------------------------------------------------
+
+function updateRiskRuntime() {
+
+    // ==========================
+    // Position Value
+    // ==========================
+
+    AI.risk.positionValue =
+
+        AI.risk.accountBalance *
+
+        (AI.risk.riskPercent / 100);
+
+    // ==========================
+    // Risk Amount
+    // ==========================
+
+    AI.risk.riskAmount =
+
+        AI.risk.positionValue;
+
+    // ==========================
+    // Reward Amount
+    // ==========================
+
+    AI.risk.rewardAmount =
+
+        AI.risk.positionValue *
+
+        AI.risk.riskRewardRatio;
+
+    // ==========================
+    // Dynamic Lot
+    // ==========================
+
+    if (AI.risk.dynamicLot) {
+
+        AI.risk.lotSize =
+
+            AI.risk.positionValue /
+
+            Math.max(AI.risk.riskDistance, 1);
+
+    }
+
+    // ==========================
+    // Lock Trading
+    // ==========================
+
+    AI.risk.tradingLocked =
+
+        !AI.risk.tradeAllowed;
+
+    // ==========================
+    // Runtime
+    // ==========================
+
+    AI.risk.lastCalculation = Date.now();
+
+    return AI.risk;
+
+}
+
 // =========================
 // Final AI Signal
 // =========================
