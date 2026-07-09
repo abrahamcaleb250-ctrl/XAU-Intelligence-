@@ -203,6 +203,11 @@ structure: {
 // =========================
 liquidity: {
 
+    // Overall Score
+    score: 0,
+
+    lastUpdate: null,
+
     // Buy Side Liquidity
     buySideTaken: false,
 
@@ -235,7 +240,7 @@ liquidity: {
 
     stopHuntTime: null,
 
-    // Premium / Discount
+    // Premium Zone
     premiumZone: {
 
         active: false,
@@ -246,6 +251,7 @@ liquidity: {
 
     },
 
+    // Discount Zone
     discountZone: {
 
         active: false,
@@ -256,8 +262,10 @@ liquidity: {
 
     },
 
-    // Liquidity History
-    history: [],
+    // Current Liquidity State
+    currentState: "NONE",
+
+    currentBias: "NONE",
 
     // Last Liquidity Event
     lastEvent: {
@@ -268,9 +276,21 @@ liquidity: {
 
         price: null,
 
-        time: null
+        time: null,
 
-    }
+        strength: 0
+
+    },
+
+    // Runtime
+    waitingForSweep: false,
+
+    liquidityGrabConfirmed: false,
+
+    liquidityShift: false,
+
+    // History
+    history: []
 
 },
 
