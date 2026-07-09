@@ -896,6 +896,153 @@ function generateFinalAISignal() {
 
         AI.signal.confirmationCount >= 5;
 
+// ==========================
+// Final Decision
+// ==========================
+
+    AI.signal.reasons = [];
+
+    AI.signal.warnings = [];
+
+    // Default
+    AI.signal.action = "WAIT";
+
+    AI.signal.tradeGrade = "C";
+
+    // ==========================
+    // News Filter
+    // ==========================
+
+    if (AI.news.tradingBlocked) {
+
+        AI.signal.action = "AVOID";
+
+        AI.signal.warnings.push(
+            "High Impact News"
+        );
+
+    }
+
+    // ==========================
+    // Risk Filter
+    // ==========================
+
+    else if (!AI.risk.tradeAllowed) {
+
+        AI.signal.action = "AVOID";
+
+        AI.signal.warnings.push(
+            AI.risk.reason
+        );
+
+    }
+
+    // ==========================
+    // BUY
+    // ==========================
+
+    else if (
+
+        AI.structure.currentTrend === "BULLISH" &&
+
+        AI.entryZones.entryReady &&
+
+        AI.candlesticks.direction === "BULLISH" &&
+
+        AI.signal.confirmation
+
+    ) {
+
+        AI.signal.action = "BUY";
+
+        AI.signal.reasons.push(
+            "Bullish Trend"
+        );
+
+        AI.signal.reasons.push(
+            "Entry Confirmed"
+        );
+
+        AI.signal.reasons.push(
+            "Bullish Candle"
+        );
+
+    }
+
+    // ==========================
+    // SELL
+    // ==========================
+
+    else if (
+
+        AI.structure.currentTrend === "BEARISH" &&
+
+        AI.entryZones.entryReady &&
+
+        AI.candlesticks.direction === "BEARISH" &&
+
+        AI.signal.confirmation
+
+    ) {
+
+        AI.signal.action = "SELL";
+
+        AI.signal.reasons.push(
+            "Bearish Trend"
+        );
+
+        AI.signal.reasons.push(
+            "Entry Confirmed"
+        );
+
+        AI.signal.reasons.push(
+            "Bearish Candle"
+        );
+
+    }
+
+    // ==========================
+    // WAIT
+    // ==========================
+
+    else {
+
+        AI.signal.action = "WAIT";
+
+        AI.signal.warnings.push(
+            "Waiting for Confirmation"
+        );
+
+    }
+
+    // ==========================
+    // Trade Grade
+    // ==========================
+
+    if (AI.signal.confidence >= 95) {
+
+        AI.signal.tradeGrade = "A+";
+
+    }
+
+    else if (AI.signal.confidence >= 90) {
+
+        AI.signal.tradeGrade = "A";
+
+    }
+
+    else if (AI.signal.confidence >= 80) {
+
+        AI.signal.tradeGrade = "B";
+
+    }
+
+    else {
+
+        AI.signal.tradeGrade = "C";
+
+    }
+
 // =========================
 // Trade Management
 // =========================
