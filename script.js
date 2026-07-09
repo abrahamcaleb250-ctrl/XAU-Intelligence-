@@ -49,55 +49,155 @@ const AI = {
 
     },
 
-    // =========================
-    // Market Structure
-    // =========================
-    structure: {
+// =========================
+// Market Structure
+// =========================
+structure: {
 
-        trendState: "UNKNOWN",
+    // Overall Trend
+    currentTrend: "UNKNOWN",
 
-        trendChanged: false,
+    previousTrend: "UNKNOWN",
 
-        trendChangePoint: null,
+    trendState: "SCANNING",
 
-        structureStrength: 0,
+    trendChanged: false,
 
-        lastStructure: null,
+    trendChangePoint: null,
 
-        previousTrend: "UNKNOWN",
+    structureStrength: 0,
 
-        bos: {
-            detected: false,
-            direction: "NONE",
-            price: null,
-            timeframe: null,
-            candle: null,
-            time: null
-        },
+    lastStructure: null,
 
-        choch: {
-            detected: false,
-            direction: "NONE",
-            price: null,
-            timeframe: null,
-            candle: null,
-            time: null
-        },
+    lastUpdate: null,
 
-        swingHigh: {
-            price: null,
-            timeframe: null,
-            candle: null
-        },
+    // ==========================
+    // Break Of Structure (BOS)
+    // ==========================
 
-        swingLow: {
-            price: null,
-            timeframe: null,
-            candle: null
-        }
+    bos: {
+
+        detected: false,
+
+        confirmed: false,
+
+        direction: "NONE",
+
+        price: null,
+
+        timeframe: null,
+
+        candle: null,
+
+        index: null,
+
+        time: null,
+
+        strength: 0
 
     },
-    
+
+    // ==========================
+    // Change Of Character (CHOCH)
+    // ==========================
+
+    choch: {
+
+        detected: false,
+
+        confirmed: false,
+
+        direction: "NONE",
+
+        price: null,
+
+        timeframe: null,
+
+        candle: null,
+
+        index: null,
+
+        time: null,
+
+        strength: 0
+
+    },
+
+    // ==========================
+    // Swing High
+    // ==========================
+
+    swingHigh: {
+
+        detected: false,
+
+        price: null,
+
+        timeframe: null,
+
+        candle: null,
+
+        index: null,
+
+        time: null
+
+    },
+
+    // ==========================
+    // Swing Low
+    // ==========================
+
+    swingLow: {
+
+        detected: false,
+
+        price: null,
+
+        timeframe: null,
+
+        candle: null,
+
+        index: null,
+
+        time: null
+
+    },
+
+    // ==========================
+    // Internal Structure
+    // ==========================
+
+    internal: {
+
+        direction: "NONE",
+
+        strength: 0,
+
+        lastBreak: null
+
+    },
+
+    // ==========================
+    // External Structure
+    // ==========================
+
+    external: {
+
+        direction: "NONE",
+
+        strength: 0,
+
+        lastBreak: null
+
+    },
+
+    // ==========================
+    // Structure History
+    // ==========================
+
+    history: []
+
+},
 // =========================
 // Liquidity Analysis
 // =========================
