@@ -795,6 +795,107 @@ signal: {
 
 },
 
+// --------------------------------------------------
+// Final AI Decision Engine - Part 1
+// --------------------------------------------------
+
+function generateFinalAISignal() {
+
+    AI.signal.generatedTime = Date.now();
+
+    AI.signal.trend = AI.structure.currentTrend;
+
+    AI.signal.marketState = AI.structure.trendState;
+
+    AI.signal.session = AI.sessions.current;
+
+    AI.signal.entryPrice = AI.marketData.livePrice;
+
+    AI.signal.stopLoss = AI.risk.stopLoss.price;
+
+    AI.signal.takeProfit = AI.risk.takeProfit.price;
+
+    AI.signal.riskReward = AI.risk.expectedRR;
+
+    AI.signal.lotSize = AI.risk.lotSize;
+
+    // ==========================
+    // Individual Scores
+    // ==========================
+
+    AI.signal.structureScore =
+        AI.structure.structureStrength;
+
+    AI.signal.liquidityScore =
+        AI.liquidity.score;
+
+    AI.signal.entryScore =
+        AI.entryZones.confluenceScore;
+
+    AI.signal.candlestickScore =
+        AI.candlesticks.strength;
+
+    AI.signal.riskScore =
+        AI.risk.tradeQuality;
+
+    // ==========================
+    // Confluence Score
+    // ==========================
+
+    AI.signal.confluenceScore = Math.round(
+
+        (
+
+            AI.signal.structureScore +
+
+            AI.signal.liquidityScore +
+
+            AI.signal.entryScore +
+
+            AI.signal.candlestickScore +
+
+            AI.signal.riskScore
+
+        ) / 5
+
+    );
+
+    // ==========================
+    // Confidence
+    // ==========================
+
+    AI.signal.confidence =
+        AI.signal.confluenceScore;
+
+    // ==========================
+    // Confirmation Counter
+    // ==========================
+
+    AI.signal.confirmationCount = 0;
+
+    if (AI.structure.bos.detected)
+        AI.signal.confirmationCount++;
+
+    if (AI.breakRetest.confirmed)
+        AI.signal.confirmationCount++;
+
+    if (AI.entryZones.entryReady)
+        AI.signal.confirmationCount++;
+
+    if (AI.candlesticks.confirmation)
+        AI.signal.confirmationCount++;
+
+    if (AI.risk.tradeAllowed)
+        AI.signal.confirmationCount++;
+
+    // ==========================
+    // AI Confirmation
+    // ==========================
+
+    AI.signal.confirmation =
+
+        AI.signal.confirmationCount >= 5;
+
 // =========================
 // Trade Management
 // =========================
