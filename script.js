@@ -2044,10 +2044,21 @@ sessions: {
 
     serverTime: null,
 
-    countdown: null
+    countdown: null,
+
+    marketOpen: false,
+
+    marketClosingSoon: false,
+
+    nextSessionTime: null,
+
+    currentVolatility: "LOW",
+
+    lastUpdate: null,
+
+    history: []
 
 },
-
 // =========================
 // News Engine
 // =========================
