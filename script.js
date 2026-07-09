@@ -455,46 +455,34 @@ candlesticks: {
 
     // Engulfing
     bullishEngulfing: false,
-
     bearishEngulfing: false,
 
-    // Pin Bars
+    // Pin Bar
+    pinBar: false,
     bullishPinBar: false,
-
     bearishPinBar: false,
 
     // Hammer Family
     hammer: false,
-
     invertedHammer: false,
-
     shootingStar: false,
-
     hangingMan: false,
 
     // Star Patterns
     morningStar: false,
-
     eveningStar: false,
-
     doji: false,
 
     // Multi-Candle Patterns
     insideBar: false,
-
     outsideBar: false,
-
     threeWhiteSoldiers: false,
-
     threeBlackCrows: false,
-
     tweezerTop: false,
-
     tweezerBottom: false,
 
     // Rejection
     bullishRejection: false,
-
     bearishRejection: false,
 
     // Confirmation
@@ -502,15 +490,23 @@ candlesticks: {
 
     pattern: "NONE",
 
+    direction: "NONE",
+
     strength: 0,
 
-    direction: "NONE",
+    confidence: 0,
+
+    score: 0,
+
+    confirmed: false,
 
     timeframe: null,
 
     candle: null,
 
     time: null,
+
+    lastUpdate: null,
 
     history: []
 
