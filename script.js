@@ -2090,6 +2090,31 @@ news: {
 
     lastNewsTime: null,
 
+    // Current News
+    title: "",
+
+    description: "",
+
+    source: "",
+
+    importance: 0,
+
+    affectedPairs: [],
+
+    expected: "",
+
+    previous: "",
+
+    actual: "",
+
+    sentiment: "NEUTRAL",
+
+    marketReaction: "UNKNOWN",
+
+    nextHighImpactEvent: null,
+
+    lastUpdate: null,
+
     history: []
 
 },
