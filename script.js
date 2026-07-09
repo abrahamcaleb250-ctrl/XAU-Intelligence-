@@ -2147,16 +2147,102 @@ news: {
     }
     
 };
-// ---------------------------
-// Trend Data (Temporary)
-// ---------------------------
+// =====================================
+// Trend Engine
+// =====================================
 
 const trendData = {
-    h4: { bullish: 72, bearish: 28 },
-    h1: { bullish: 72, bearish: 28 },
-    m15: { bullish: 72, bearish: 28 },
-    m5: { bullish: 72, bearish: 28 }
+
+    h4: {
+        bullish: 0,
+        bearish: 0,
+        direction: "UNKNOWN",
+        strength: 0,
+        lastUpdate: null
+    },
+
+    h1: {
+        bullish: 0,
+        bearish: 0,
+        direction: "UNKNOWN",
+        strength: 0,
+        lastUpdate: null
+    },
+
+    m15: {
+        bullish: 0,
+        bearish: 0,
+        direction: "UNKNOWN",
+        strength: 0,
+        lastUpdate: null
+    },
+
+    m5: {
+        bullish: 0,
+        bearish: 0,
+        direction: "UNKNOWN",
+        strength: 0,
+        lastUpdate: null
+    }
+
 };
+
+// =====================================
+// Trend Calculation Engine
+// =====================================
+
+function calculateTrend(timeframe) {
+
+    const candles = AI.marketData.candles[timeframe];
+
+    if (!candles || candles.length < 20) return;
+
+    let bullish = 0;
+    let bearish = 0;
+
+    const latest = candles[candles.length - 1];
+
+    if (latest.close > latest.open)
+        bullish += 25;
+    else
+        bearish += 25;
+
+    if (AI.structure.currentTrend === "BULLISH")
+        bullish += 25;
+
+    if (AI.structure.currentTrend === "BEARISH")
+        bearish += 25;
+
+    if (AI.liquidity.buySideTaken)
+        bullish += 15;
+
+    if (AI.liquidity.sellSideTaken)
+        bearish += 15;
+
+    if (AI.candlesticks.direction === "BULLISH")
+        bullish += 20;
+
+    if (AI.candlesticks.direction === "BEARISH")
+        bearish += 20;
+
+    bullish = Math.min(100, bullish);
+    bearish = Math.min(100, bearish);
+
+    trendData[timeframe].bullish = bullish;
+    trendData[timeframe].bearish = bearish;
+
+    trendData[timeframe].direction =
+        bullish > bearish ? "BULLISH" :
+        bearish > bullish ? "BEARISH" :
+        "RANGING";
+
+    trendData[timeframe].strength =
+        Math.max(bullish, bearish);
+
+    trendData[timeframe].lastUpdate =
+        Date.now();
+
+}
 
 // ---------------------------
 // Master Bias Calculation
