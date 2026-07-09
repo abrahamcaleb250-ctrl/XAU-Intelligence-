@@ -1370,6 +1370,139 @@ discipline: {
     history: []
 
 },
+
+// ---------------------------
+// Discipline Engine
+// ---------------------------
+
+function updateDiscipline() {
+
+    const today = new Date().toDateString();
+
+    // ==========================
+    // Trading Day
+    // ==========================
+
+    if (
+
+        AI.trade.active ||
+
+        AI.trade.history.length > 0
+
+    ) {
+
+        AI.discipline.tradingToday = true;
+
+    }
+
+    // ==========================
+    // Streak
+    // ==========================
+
+    if (
+
+        AI.discipline.tradingToday &&
+        AI.discipline.journalCompleted
+
+    ) {
+
+        AI.discipline.currentStreak++;
+
+        if (
+
+            AI.discipline.currentStreak >
+            AI.discipline.bestStreak
+
+        ) {
+
+            AI.discipline.bestStreak =
+                AI.discipline.currentStreak;
+
+        }
+
+    }
+
+    // ==========================
+    // Consistency
+    // ==========================
+
+    const totalDays =
+
+        AI.discipline.totalTradingDays +
+        AI.discipline.missedDays;
+
+    if (totalDays > 0) {
+
+        AI.discipline.consistencyScore =
+
+            Math.round(
+
+                (
+
+                    AI.discipline.totalTradingDays /
+
+                    totalDays
+
+                ) * 100
+
+            );
+
+    }
+
+    // ==========================
+    // Status
+    // ==========================
+
+    if (
+
+        AI.discipline.consistencyScore >= 90
+
+    ) {
+
+        AI.discipline.status =
+            "DISCIPLINED";
+
+    }
+
+    else if (
+
+        AI.discipline.consistencyScore >= 70
+
+    ) {
+
+        AI.discipline.status =
+            "IMPROVING";
+
+    }
+
+    else {
+
+        AI.discipline.status =
+            "NEEDS_IMPROVEMENT";
+
+    }
+
+    // ==========================
+    // Calendar
+    // ==========================
+
+    AI.discipline.calendar.push({
+
+        date: today,
+
+        traded: AI.discipline.tradingToday,
+
+        journal: AI.discipline.journalCompleted,
+
+        review: AI.discipline.reviewCompleted
+
+    });
+
+    AI.discipline.lastTradingDay = today;
+
+    return AI.discipline;
+
+}
     
 // =========================
 // Trading Sessions
