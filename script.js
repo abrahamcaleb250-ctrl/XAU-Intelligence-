@@ -1260,6 +1260,116 @@ function updateJournal(trade) {
             : 0;
 
 }
+
+// =========================
+// Discipline
+// =========================
+discipline: {
+
+    // Daily Progress
+    tradingToday: false,
+
+    journalCompleted: false,
+
+    reviewCompleted: false,
+
+    followedPlan: true,
+
+    // Consistency
+    currentStreak: 0,
+
+    bestStreak: 0,
+
+    totalTradingDays: 0,
+
+    missedDays: 0,
+
+    consistencyScore: 100,
+
+    // Calendar
+    calendar: [],
+
+    // Reviews
+    dailyReview: {
+
+        completed: false,
+
+        notes: "",
+
+        mistakes: [],
+
+        strengths: [],
+
+        rating: 0
+
+    },
+
+    weeklyReview: {
+
+        completed: false,
+
+        notes: "",
+
+        totalTrades: 0,
+
+        wins: 0,
+
+        losses: 0,
+
+        winRate: 0,
+
+        lessons: []
+
+    },
+
+    // Psychology
+    psychology: {
+
+        confidence: 100,
+
+        discipline: 100,
+
+        patience: 100,
+
+        emotionalControl: 100,
+
+        revengeTrading: false,
+
+        overTrading: false,
+
+        fear: false,
+
+        greed: false
+
+    },
+
+    // Rule Violations
+    violations: {
+
+        total: 0,
+
+        revengeTrading: 0,
+
+        overRisking: 0,
+
+        overTrading: 0,
+
+        earlyExit: 0,
+
+        lateEntry: 0
+
+    },
+
+    // Runtime
+    lastTradingDay: null,
+
+    lastReview: null,
+
+    status: "DISCIPLINED",
+
+    history: []
+
+},
     
 // =========================
 // Trading Sessions
