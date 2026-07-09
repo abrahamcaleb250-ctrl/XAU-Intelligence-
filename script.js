@@ -323,7 +323,9 @@ entryZones: {
         top: null,
         bottom: null,
         midpoint: null,
+        filled: false,
         timeframe: null,
+        strength: 0,
         candle: null,
         time: null
 
@@ -429,6 +431,18 @@ entryZones: {
     bestEntry: "NONE",
 
     confluenceScore: 0,
+
+    confirmationCount: 0,
+
+    score: 0,
+
+    confidence: 0,
+
+    valid: false,
+
+    reason: "NONE",
+
+    lastUpdate: null,
 
     history: []
 
