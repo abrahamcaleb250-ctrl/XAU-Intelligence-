@@ -1043,6 +1043,95 @@ function generateFinalAISignal() {
 
     }
 
+    // ==========================
+    // Signal Timing
+    // ==========================
+
+    AI.signal.validUntil =
+
+        Date.now() + (5 * 60 * 1000);
+
+    // ==========================
+    // Execution
+    // ==========================
+
+    AI.signal.executed = false;
+
+    AI.signal.result = "PENDING";
+
+    // ==========================
+    // Save History
+    // ==========================
+
+    AI.signal.history.push({
+
+        action: AI.signal.action,
+
+        trend: AI.signal.trend,
+
+        confidence: AI.signal.confidence,
+
+        tradeGrade: AI.signal.tradeGrade,
+
+        entryPrice: AI.signal.entryPrice,
+
+        stopLoss: AI.signal.stopLoss,
+
+        takeProfit: AI.signal.takeProfit,
+
+        riskReward: AI.signal.riskReward,
+
+        session: AI.signal.session,
+
+        marketState: AI.signal.marketState,
+
+        reasons: [...AI.signal.reasons],
+
+        warnings: [...AI.signal.warnings],
+
+        generatedTime: AI.signal.generatedTime,
+
+        validUntil: AI.signal.validUntil
+
+    });
+
+    // Limit history
+    if (AI.signal.history.length > 500) {
+
+        AI.signal.history.shift();
+
+    }
+
+    return AI.signal;
+
+}
+
+// =====================================
+// Generate Final Signal
+// =====================================
+
+const masterBias = calculateMasterBias();
+
+const marketStructure = analyzeMarketStructure(masterBias);
+
+const tradeSignal = generateSignal(masterBias);
+
+const finalSignal = generateFinalAISignal();
+
+AI.structure.current = marketStructure;
+
+AI.signal.current = tradeSignal;
+
+AI.signal.final = finalSignal;
+
+console.log("MASTER BIAS", masterBias);
+
+console.log("MARKET STRUCTURE", marketStructure);
+
+console.log("TRADE SIGNAL", tradeSignal);
+
+console.log("FINAL AI SIGNAL", finalSignal);
+
 // =========================
 // Trade Management
 // =========================
