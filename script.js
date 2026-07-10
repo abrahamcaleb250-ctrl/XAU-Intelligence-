@@ -2161,7 +2161,7 @@ control: {
     emergencyStop: false,
 
     // Status
-    status: "RUNNING", // RUNNING | PAUSED | STOPPED
+    status: "RUNNING",
 
     // Runtime
     startedAt: Date.now(),
@@ -2170,8 +2170,12 @@ control: {
 
     resumedAt: null,
 
+    stoppedAt: null,
+
     // Statistics
     totalPauses: 0,
+
+    totalStops: 0,
 
     history: []
 
