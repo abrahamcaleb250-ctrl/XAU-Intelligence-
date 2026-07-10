@@ -2176,6 +2176,81 @@ control: {
     history: []
 
 },
+
+// =====================================
+// AI Control Functions
+// =====================================
+
+function pauseAI() {
+
+    AI.control.paused = true;
+
+    AI.control.status = "PAUSED";
+
+    AI.control.pausedAt = Date.now();
+
+    AI.control.totalPauses++;
+
+    AI.control.history.push({
+        action: "PAUSED",
+        time: Date.now()
+    });
+
+    console.log("AI Paused");
+
+}
+
+function resumeAI() {
+
+    AI.control.paused = false;
+
+    AI.control.status = "RUNNING";
+
+    AI.control.resumedAt = Date.now();
+
+    AI.control.history.push({
+        action: "RESUMED",
+        time: Date.now()
+    });
+
+    console.log("AI Resumed");
+
+}
+
+function emergencyStopAI() {
+
+    AI.control.enabled = false;
+
+    AI.control.emergencyStop = true;
+
+    AI.control.status = "STOPPED";
+
+    AI.control.stoppedAt = Date.now();
+
+    AI.control.totalStops++;
+
+    AI.control.history.push({
+        action: "STOPPED",
+        time: Date.now()
+    });
+
+    console.log("AI Emergency Stopped");
+
+}
+
+function toggleAI() {
+
+    if (AI.control.status === "RUNNING") {
+
+        pauseAI();
+
+    } else {
+
+        resumeAI();
+
+    }
+
+}
 // =====================================
 // Trend Engine
 // =====================================
