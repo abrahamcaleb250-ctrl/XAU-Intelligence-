@@ -2147,6 +2147,35 @@ news: {
     }
     
 };
+
+// =========================
+// AI Control
+// =========================
+control: {
+
+    // Master Switch
+    enabled: true,
+
+    paused: false,
+
+    emergencyStop: false,
+
+    // Status
+    status: "RUNNING", // RUNNING | PAUSED | STOPPED
+
+    // Runtime
+    startedAt: Date.now(),
+
+    pausedAt: null,
+
+    resumedAt: null,
+
+    // Statistics
+    totalPauses: 0,
+
+    history: []
+
+},
 // =====================================
 // Trend Engine
 // =====================================
