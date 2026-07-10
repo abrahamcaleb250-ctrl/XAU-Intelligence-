@@ -3294,17 +3294,47 @@ function startPriceEngine() {
 
     PriceEngine.running = true;
 
+    console.log("Starting AI Runtime...");
+
     fetchLivePrice();
 
     setInterval(() => {
 
+        // Live Market
         fetchLivePrice();
 
+        // AI Analysis
         detectLiquidity();
 
         detectTradingSession();
 
         detectNews();
+
+        detectSwings();
+
+        detectEntryZones();
+
+        detectCandlestickPatterns();
+
+        // AI Brain
+        const masterBias = calculateMasterBias();
+
+        analyzeMarketStructure(masterBias);
+
+        generateSignal(masterBias);
+
+        generateFinalAISignal();
+
+        calculateRisk();
+
+        updateRiskRuntime();
+
+        manageTrade();
+
+        updateDiscipline();
+
+        // Refresh Dashboard
+        updateDashboard();
 
     }, PriceEngine.interval);
 
