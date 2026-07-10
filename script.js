@@ -3559,19 +3559,77 @@ if (buttonContainer) {
 }
 
 // =====================================
-// Update AI Signal Panel
+// Update Dashboard
 // =====================================
 
-const signalType = document.getElementById("signal-type");
-const signalConfidence = document.getElementById("signal-confidence");
-const marketBias = document.getElementById("market-bias");
-const signalStatus = document.getElementById("signal-status");
+function updateDashboard() {
 
-if (signalType && signalConfidence && marketBias && signalStatus) {
+    const signalType = document.getElementById("signal-type");
+    const signalConfidence = document.getElementById("signal-confidence");
+    const marketBias = document.getElementById("market-bias");
+    const signalStatus = document.getElementById("signal-status");
 
-    signalType.innerText = aiSignal.signal;
-    signalConfidence.innerText = aiSignal.confidence + "%";
-    marketBias.innerText = aiSignal.trend;
-    signalStatus.innerText = aiSignal.status;
+    if (
+        signalType &&
+        signalConfidence &&
+        marketBias &&
+        signalStatus
+    ) {
+
+        signalType.innerText =
+            AI.signal.final.action;
+
+        signalConfidence.innerText =
+            AI.signal.final.confidence + "%";
+
+        marketBias.innerText =
+            AI.signal.final.trend;
+
+        signalStatus.innerText =
+            AI.signal.final.marketState;
+
+    }
+
+    // ==========================
+    // Live Price
+    // ==========================
+
+    const livePrice =
+        document.getElementById("live-price");
+
+    if (livePrice) {
+
+        livePrice.innerText =
+            AI.marketData.livePrice;
+
+    }
+
+    // ==========================
+    // Trading Session
+    // ==========================
+
+    const session =
+        document.getElementById("session");
+
+    if (session) {
+
+        session.innerText =
+            AI.sessions.current;
+
+    }
+
+    // ==========================
+    // Confidence Bar
+    // ==========================
+
+    const confidenceBar =
+        document.getElementById("confidence-bar");
+
+    if (confidenceBar) {
+
+        confidenceBar.style.width =
+            AI.signal.final.confidence + "%";
+
+    }
 
 }
