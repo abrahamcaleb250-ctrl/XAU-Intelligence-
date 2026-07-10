@@ -3059,42 +3059,79 @@ async function fetchLivePrice() {
 
         const data = await res.json();
 
+        const price = Number(data.spot_usd_oz);
+
+        // ==========================
+        // Update Price Engine
+        // ==========================
+
         PriceEngine.lastPrice = PriceEngine.currentPrice;
 
-        PriceEngine.currentPrice = data.spot_usd_oz;
+        PriceEngine.currentPrice = price;
 
-        PriceEngine.lastUpdate = new Date();
+        PriceEngine.lastUpdate = Date.now();
 
-        AI.marketData.livePrice = data.spot_usd_oz;
+        // ==========================
+        // Update AI Market Data
+        // ==========================
 
-        AI.marketData.lastPrice = PriceEngine.lastPrice;
+        AI.marketData.lastPrice = AI.marketData.livePrice;
+
+        AI.marketData.livePrice = price;
+
+        // ==========================
+        // Price History
+        // ==========================
 
         AI.marketData.priceHistory.push({
 
-            price: data.spot_usd_oz,
+            price,
 
             time: Date.now()
 
         });
+
+        if (AI.marketData.priceHistory.length > 1000) {
+
+            AI.marketData.priceHistory.shift();
+
+        }
+
+        // ==========================
+        // Tick Data
+        // ==========================
 
         AI.marketData.ticks.push({
 
-            price: data.spot_usd_oz,
+            price,
 
             time: Date.now()
 
         });
 
-        // Keep only the latest 500 ticks
         if (AI.marketData.ticks.length > 500) {
 
             AI.marketData.ticks.shift();
 
         }
 
+        // ==========================
+        // Build Candles
+        // ==========================
+
         buildCandles();
 
-        console.log("Live Price:", data.spot_usd_oz);
+        // ==========================
+        // Update Current Trade
+        // ==========================
+
+        if (AI.trade.active) {
+
+            AI.trade.currentPrice = price;
+
+        }
+
+        console.log("Live Price:", price);
 
     }
 
