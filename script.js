@@ -2250,21 +2250,45 @@ function calculateTrend(timeframe) {
 
 function calculateMasterBias() {
 
+    // Update all timeframe trends
+    calculateTrend("h4");
+    calculateTrend("h1");
+    calculateTrend("m15");
+    calculateTrend("m5");
+
     // Weighted Trend Voting
     const bullish =
+
         (trendData.h4.bullish * 0.40) +
+
         (trendData.h1.bullish * 0.30) +
+
         (trendData.m15.bullish * 0.20) +
+
         (trendData.m5.bullish * 0.10);
 
-    const bearish = 100 - bullish;
+    const bearish =
 
-    let direction = "NEUTRAL";
+        (trendData.h4.bearish * 0.40) +
 
-    if (bullish >= 60) {
+        (trendData.h1.bearish * 0.30) +
+
+        (trendData.m15.bearish * 0.20) +
+
+        (trendData.m5.bearish * 0.10);
+
+    let direction = "RANGING";
+
+    if (bullish >= 60 && bullish > bearish) {
+
         direction = "BULLISH";
-    } else if (bearish >= 60) {
+
+    }
+
+    else if (bearish >= 60 && bearish > bullish) {
+
         direction = "BEARISH";
+
     }
 
     return {
@@ -2273,7 +2297,28 @@ function calculateMasterBias() {
 
         bearish: Math.round(bearish),
 
-        direction
+        direction,
+
+        strongestTimeframe:
+
+            trendData.h4.strength >= trendData.h1.strength &&
+            trendData.h4.strength >= trendData.m15.strength &&
+            trendData.h4.strength >= trendData.m5.strength
+
+                ? "H4"
+
+            : trendData.h1.strength >= trendData.m15.strength &&
+              trendData.h1.strength >= trendData.m5.strength
+
+                ? "H1"
+
+            : trendData.m15.strength >= trendData.m5.strength
+
+                ? "M15"
+
+                : "M5",
+
+        timestamp: Date.now()
 
     };
 
