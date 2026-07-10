@@ -3354,17 +3354,32 @@ async function detectNews() {
 // Start Price Engine
 // =====================================
 
+let aiRuntime = null;
+
 function startPriceEngine() {
 
     if (PriceEngine.running) return;
 
+    if (!AI.control.enabled) return;
+
     PriceEngine.running = true;
+
+    AI.control.status = "RUNNING";
 
     console.log("Starting AI Runtime...");
 
     fetchLivePrice();
 
-    setInterval(() => {
+    aiRuntime = setInterval(() => {
+
+        // Emergency Stop
+        if (
+            AI.control.paused ||
+            AI.control.emergencyStop ||
+            !AI.control.enabled
+        ) {
+            return;
+        }
 
         // Live Market
         fetchLivePrice();
@@ -3409,7 +3424,6 @@ function startPriceEngine() {
 }
 
 startPriceEngine();
-
 // =====================================
 // Candle Builder Engine
 // =====================================
