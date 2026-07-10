@@ -3403,11 +3403,13 @@ function buildCandles() {
 
         open: firstTick.price,
 
-        high: Math.max(...ticks.map(tick => tick.price)),
+        high: Math.max(...ticks.map(t => t.price)),
 
-        low: Math.min(...ticks.map(tick => tick.price)),
+        low: Math.min(...ticks.map(t => t.price)),
 
         close: lastTick.price,
+
+        volume: ticks.length,
 
         startTime: firstTick.time,
 
@@ -3415,7 +3417,10 @@ function buildCandles() {
 
     };
 
-    // Create first candle
+    // ==========================
+    // First Candle
+    // ==========================
+
     if (AI.marketData.candles.m5.length === 0) {
 
         AI.marketData.candles.m5.push(candle);
@@ -3424,26 +3429,44 @@ function buildCandles() {
 
     }
 
-    const current = AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1];
+    const current = AI.marketData.candles.m5[
+        AI.marketData.candles.m5.length - 1
+    ];
 
-    // If 5 minutes have passed, start a new candle
+    // ==========================
+    // New Candle
+    // ==========================
+
     if ((now - current.startTime) >= FIVE_MINUTES) {
 
         AI.marketData.candles.m5.push(candle);
 
-        // Keep only the latest 500 candles
         if (AI.marketData.candles.m5.length > 500) {
 
             AI.marketData.candles.m5.shift();
 
         }
 
+        // AI Updates
         detectSwings();
 
-    } else {
+        detectLiquidity();
 
-        // Update current candle
-        AI.marketData.candles.m5[AI.marketData.candles.m5.length - 1] = candle;
+        detectEntryZones();
+
+        detectCandlestickPatterns();
+
+    }
+
+    // ==========================
+    // Update Current Candle
+    // ==========================
+
+    else {
+
+        AI.marketData.candles.m5[
+            AI.marketData.candles.m5.length - 1
+        ] = candle;
 
     }
 
