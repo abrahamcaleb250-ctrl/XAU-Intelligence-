@@ -3503,6 +3503,44 @@ function startPriceEngine() {
 }
 
 startPriceEngine();
+
+// =====================================
+// Browser Notification Permission
+// =====================================
+
+async function initializeBrowserNotifications() {
+
+    if (!("Notification" in window)) {
+
+        console.log("Browser notifications are not supported.");
+
+        return;
+
+    }
+
+    if (Notification.permission === "default") {
+
+        const permission = await Notification.requestPermission();
+
+        console.log("Notification Permission:", permission);
+
+    }
+
+    if (Notification.permission === "granted") {
+
+        console.log("Notifications Enabled");
+
+    } else {
+
+        console.log("Notifications Disabled");
+
+    }
+
+}
+
+// Start notification system
+initializeBrowserNotifications();
+
 // =====================================
 // Candle Builder Engine
 // =====================================
