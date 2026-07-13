@@ -3407,17 +3407,60 @@ async function detectNews() {
 
     try {
 
-        // Placeholder for future live News API
-
+        // Reset
         AI.news.highImpact = false;
-
         AI.news.mediumImpact = false;
-
         AI.news.lowImpact = false;
 
         AI.news.tradingBlocked = false;
-
         AI.news.cooldownActive = false;
+
+        // No API configured yet
+        if (!window.NewsEngine || !window.NewsEngine.events) return;
+
+        const now = Date.now();
+
+        const events = window.NewsEngine.events;
+
+        for (const event of events) {
+
+            const eventTime = new Date(event.time).getTime();
+
+            const minutes =
+                (eventTime - now) / 60000;
+
+            // High Impact USD
+            if (event.currency === "USD" && event.impact === "HIGH") {
+
+                AI.news.highImpact = true;
+                AI.news.event = event.title;
+                AI.news.eventTime = event.time;
+
+                // Block trading 15 min before and after
+                if (minutes <= 15 && minutes >= -15) {
+
+                    AI.news.tradingBlocked = true;
+                    AI.news.cooldownActive = true;
+
+                }
+
+            }
+
+            // Medium Impact
+            if (event.currency === "USD" && event.impact === "MEDIUM") {
+
+                AI.news.mediumImpact = true;
+
+            }
+
+            // Low Impact
+            if (event.currency === "USD" && event.impact === "LOW") {
+
+                AI.news.lowImpact = true;
+
+            }
+
+        }
 
     }
 
@@ -3428,7 +3471,6 @@ async function detectNews() {
     }
 
 }
-
 // =====================================
 // Start Price Engine
 // =====================================
