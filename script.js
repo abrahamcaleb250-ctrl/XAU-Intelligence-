@@ -3835,3 +3835,71 @@ function updateDashboard() {
     }
 
 }
+
+// =====================================
+// Live News Connection Engine
+// =====================================
+
+const NewsConnection = {
+
+    source: "FREE",
+
+    lastUpdate: null,
+
+    connected: false,
+
+    events: [],
+
+    async fetchNews() {
+
+        try {
+
+            // Placeholder
+            // Later this URL will be replaced
+            // with the free economic calendar feed.
+
+            const response = await fetch("./news/news.json");
+
+            const data = await response.json();
+
+            this.events = data.events || [];
+
+            this.connected = true;
+
+            this.lastUpdate = Date.now();
+
+            window.NewsEngine = {
+
+                events: this.events
+
+            };
+
+            console.log("News Connected");
+
+        }
+
+        catch (err) {
+
+            console.log("News Connection Failed");
+
+            this.connected = false;
+
+        }
+
+    },
+
+    autoRefresh() {
+
+        this.fetchNews();
+
+        setInterval(() => {
+
+            this.fetchNews();
+
+        }, 60000);
+
+    }
+
+};
+
+NewsConnection.autoRefresh();
