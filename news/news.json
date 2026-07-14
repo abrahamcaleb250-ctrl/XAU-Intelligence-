@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "title": "US Non-Farm Payrolls",
+      "currency": "USD",
+      "impact": "HIGH",
+      "time": "2026-06-26T12:30:00Z"
+    },
+    {
+      "title": "US CPI",
+      "currency": "USD",
+      "impact": "HIGH",
+      "time": "2026-06-30T12:30:00Z"
+    }
+  ]
+}
