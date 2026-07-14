@@ -79,3 +79,12 @@ const Database = {
 };
 
 Database.init();
+// =====================================
+// Auto Save Engine
+// =====================================
+
+setInterval(() => {
+
+    Database.save();
+
+}, 5000);
