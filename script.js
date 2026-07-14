@@ -3414,6 +3414,42 @@ async function detectNews() {
 
         AI.news.tradingBlocked = false;
         AI.news.cooldownActive = false;
+        if (window.NewsEngine && window.NewsEngine.events) {
+
+    const now = Date.now();
+
+    for (const event of window.NewsEngine.events) {
+
+        const eventTime = new Date(event.time).getTime();
+
+        const diff = (eventTime - now) / 60000;
+
+        if (
+
+            event.currency === "USD" &&
+            event.impact === "HIGH"
+
+        ) {
+
+            AI.news.highImpact = true;
+
+            AI.news.event = event.title;
+
+            AI.news.eventTime = event.time;
+
+            if (diff <= 15 && diff >= -15) {
+
+                AI.news.tradingBlocked = true;
+
+                AI.news.cooldownActive = true;
+
+            }
+
+        }
+
+    }
+
+}
 
         // No API configured yet
         if (!window.NewsEngine || !window.NewsEngine.events) return;
