@@ -225,18 +225,6 @@ transition:.3s;
 
 }
 
-#menuBubble span{
-
-width:22px;
-
-height:3px;
-
-background:white;
-
-border-radius:10px;
-
-}
-
 #menuBubble:hover{
 
 transform:scale(1.05);
