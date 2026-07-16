@@ -1300,6 +1300,13 @@ function generateFinalAISignal() {
     }
 
     return AI.signal;
+    // Save AI Signal
+
+if (typeof Database !== "undefined") {
+
+    Database.save();
+
+}
 
 }
 
