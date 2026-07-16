@@ -1509,6 +1509,15 @@ function manageTrade() {
 
     AI.trade.tradeDuration =
         Date.now() - AI.trade.entryTime;
+    // =====================================
+    // Save Trade Runtime
+    // =====================================
+
+    if (typeof Database !== "undefined") {
+
+    Database.save();
+
+}
 
 }
 
