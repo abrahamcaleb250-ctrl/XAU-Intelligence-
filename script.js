@@ -1977,6 +1977,13 @@ function updateDiscipline() {
     AI.discipline.lastTradingDay = today;
 
     return AI.discipline;
+    // Save Discipline
+
+if (typeof Database !== "undefined") {
+
+    Database.save();
+
+}
 
 }
     
