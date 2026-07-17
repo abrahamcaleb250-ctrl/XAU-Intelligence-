@@ -3966,20 +3966,26 @@ NewsConnection.autoRefresh();
 /* Floating Navigation */
 /* ================================= */
 
-const menuBubble = document.getElementById("menuBubble");
-const sideMenu = document.getElementById("sideMenu");
-const overlay = document.getElementById("overlay");
+document.addEventListener("DOMContentLoaded", function () {
 
-menuBubble.addEventListener("click", () => {
+    const menuBubble = document.getElementById("menuBubble");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
 
-    sideMenu.classList.toggle("open");
-    overlay.classList.toggle("show");
+    if (!menuBubble || !sideMenu || !overlay) return;
 
-});
+    menuBubble.addEventListener("click", function () {
 
-overlay.addEventListener("click", () => {
+        sideMenu.classList.toggle("open");
+        overlay.classList.toggle("show");
 
-    sideMenu.classList.remove("open");
-    overlay.classList.remove("show");
+    });
+
+    overlay.addEventListener("click", function () {
+
+        sideMenu.classList.remove("open");
+        overlay.classList.remove("show");
+
+    });
 
 });
