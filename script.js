@@ -3962,3 +3962,24 @@ const NewsConnection = {
 };
 
 NewsConnection.autoRefresh();
+/* ================================= */
+/* Floating Navigation */
+/* ================================= */
+
+const menuBubble = document.getElementById("menuBubble");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+menuBubble.addEventListener("click", () => {
+
+    sideMenu.classList.toggle("open");
+    overlay.classList.toggle("show");
+
+});
+
+overlay.addEventListener("click", () => {
+
+    sideMenu.classList.remove("open");
+    overlay.classList.remove("show");
+
+});
