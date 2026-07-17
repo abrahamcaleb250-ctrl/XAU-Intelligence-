@@ -230,7 +230,7 @@ transform:scale(1.35);
 
 }
 /* ================================= */
-/* Hidden Menu */
+/* Hidden Menu Drawer */
 /* ================================= */
 
 #sideMenu{
@@ -239,53 +239,31 @@ position:fixed;
 
 top:0;
 
-left:-310px;
+left:-100%;
 
-width:280px;
+width:260px;
 
 height:100vh;
 
-background:#111;
+background:#111111;
 
 padding-top:120px;
-
-transition:.35s ease;
-
-z-index:99998;
 
 display:flex;
 
 flex-direction:column;
+
+transition:left .35s ease;
+
+z-index:99998;
+
+overflow-y:auto;
 
 }
 
 #sideMenu.open{
 
 left:0;
-
-}
-
-.menu-item{
-
-padding:18px 28px;
-
-font-size:22px;
-
-font-weight:700;
-
-color:white;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.menu-item:hover{
-
-color:#FFD700;
-
-padding-left:38px;
 
 }
 
