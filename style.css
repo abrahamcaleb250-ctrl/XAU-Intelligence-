@@ -1,4 +1,4 @@
-body {
+top {
     background-color: #0a0a0a;
     color: white;
     font-family: Arial, sans-serif;
@@ -191,8 +191,8 @@ hr {
 
 position:fixed;
 
-top:108px;
-
+top:95px;
+    
 left:16px;
 
 width:44px;
