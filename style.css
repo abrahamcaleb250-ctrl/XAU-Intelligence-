@@ -268,6 +268,36 @@ left:0;
 }
 
 /* ================================= */
+/* Drawer Menu Items */
+/* ================================= */
+
+.menu-item{
+
+padding:22px 28px;
+
+font-size:28px;
+
+font-weight:900;
+
+color:#FFFFFF;
+
+letter-spacing:0.5px;
+
+cursor:pointer;
+
+transition:0.25s;
+
+}
+
+.menu-item:hover{
+
+color:#FFD700;
+
+padding-left:36px;
+
+}
+
+/* ================================= */
 /* Overlay */
 /* ================================= */
 
