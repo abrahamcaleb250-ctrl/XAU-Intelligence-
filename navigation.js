@@ -1,1 +1,40 @@
+/* ================================= */
+/* XAU Intelligence Navigation */
+/* ================================= */
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuBubble = document.getElementById("menuBubble");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+
+    if (!menuBubble) {
+        console.log("menuBubble not found");
+        return;
+    }
+
+    if (!sideMenu) {
+        console.log("sideMenu not found");
+        return;
+    }
+
+    if (!overlay) {
+        console.log("overlay not found");
+        return;
+    }
+
+    menuBubble.onclick = function () {
+
+        sideMenu.classList.add("open");
+        overlay.classList.add("show");
+
+    };
+
+    overlay.onclick = function () {
+
+        sideMenu.classList.remove("open");
+        overlay.classList.remove("show");
+
+    };
+
+});
