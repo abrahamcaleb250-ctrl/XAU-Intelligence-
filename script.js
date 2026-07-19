@@ -3962,30 +3962,3 @@ const NewsConnection = {
 };
 
 NewsConnection.autoRefresh();
-/* ================================= */
-/* Floating Navigation */
-/* ================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const menuBubble = document.getElementById("menuBubble");
-    const sideMenu = document.getElementById("sideMenu");
-    const overlay = document.getElementById("overlay");
-
-    if (!menuBubble || !sideMenu || !overlay) return;
-
-    menuBubble.addEventListener("click", function () {
-
-        sideMenu.classList.toggle("open");
-        overlay.classList.toggle("show");
-
-    });
-
-    overlay.addEventListener("click", function () {
-
-        sideMenu.classList.remove("open");
-        overlay.classList.remove("show");
-
-    });
-
-});
