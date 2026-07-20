@@ -49,3 +49,7 @@ document.getElementById("navDashboard").onclick = () => {
 document.getElementById("navJournal").onclick = () => {
     window.location.href = "journal.html";
 };
+
+document.getElementById("navHistory").onclick = () => {
+    window.location.href = "history.html";
+};
