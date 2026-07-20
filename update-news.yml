@@ -1,0 +1,13 @@
+name: Update Economic News
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
