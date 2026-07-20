@@ -5,9 +5,29 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-news:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Economic Calendar
+        run: |
+          mkdir -p news
+          curl -L "https://nfs.faireconomy.media/ff_calendar_thisweek.json" -o news/news.json
+
+      - name: Commit Updated News
+        run: |
+          git config --global user.name "XAU Intelligence AI"
+          git config --global user.email "bot@xauintelligence.ai"
+
+          git add news/news.json
+
+          git diff --cached --quiet || git commit -m "Auto update economic news"
+
+          git push
