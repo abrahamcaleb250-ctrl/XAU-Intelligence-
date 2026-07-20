@@ -229,8 +229,47 @@ line-height:0.9;
 transform:scale(1.35);
 
 }
+
 /* ================================= */
 /* Hidden Menu Drawer */
+/* ================================= */
+
+#sideMenu{
+
+position:fixed;
+
+top:0;
+
+left:-100%;
+
+width:320px;
+
+height:100vh;
+
+background:#111111;
+
+padding-top:120px;
+
+display:flex;
+
+flex-direction:column;
+
+transition:left .35s ease;
+
+z-index:99998;
+
+overflow-y:auto;
+
+}
+
+#sideMenu.open{
+
+left:0;
+
+}
+
+/* ================================= */
+/* Drawer Menu Items */
 /* ================================= */
 
 .menu-item{
@@ -263,39 +302,9 @@ transition:.25s;
 
 .menu-item:hover{
 
-color:#FFD700;
+color:#FFFFFF;
 
 padding-left:40px;
-
-}
-
-/* ================================= */
-/* Drawer Menu Items */
-/* ================================= */
-
-.menu-item{
-
-padding:22px 28px;
-
-font-size:50px;
-
-font-weight:900;
-
-color:red;
-
-letter-spacing:0.5px;
-
-cursor:pointer;
-
-transition:0.25s;
-
-}
-
-.menu-item:hover{
-
-color:#FFD700;
-
-padding-left:36px;
 
 }
 
