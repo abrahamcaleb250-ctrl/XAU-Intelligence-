@@ -53,3 +53,6 @@ document.getElementById("navJournal").onclick = () => {
 document.getElementById("navHistory").onclick = () => {
     window.location.href = "history.html";
 };
+document.getElementById("navConsistency").onclick = () => {
+    window.location.href = "consistency.html";
+};
