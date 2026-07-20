@@ -56,3 +56,6 @@ document.getElementById("navHistory").onclick = () => {
 document.getElementById("navConsistency").onclick = () => {
     window.location.href = "consistency.html";
 };
+document.getElementById("navNews").onclick = () => {
+    window.location.href = "news.html";
+};
