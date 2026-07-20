@@ -38,3 +38,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 });
+// ==============================
+// Navigation Links
+// ==============================
+
+document.getElementById("navDashboard").onclick = () => {
+    window.location.href = "index.html";
+};
+
+document.getElementById("navJournal").onclick = () => {
+    window.location.href = "journal.html";
+};
