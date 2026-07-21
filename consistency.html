@@ -11,44 +11,64 @@
 
 <div id="sideMenu">
 
-    <div class="menu-item" id="navDashboard">Dashboard</div>
-    <div class="menu-item" id="navJournal">Journal</div>
-    <div class="menu-item" id="navHistory">Trade History</div>
-    <div class="menu-item" id="navConsistency">Consistency</div>
-    <div class="menu-item" id="navNews">News</div>
-    <div class="menu-item" id="navSettings">Settings</div>
+<div class="menu-item" id="navDashboard">Dashboard</div>
+
+<div class="menu-item" id="navJournal">Journal</div>
+
+<div class="menu-item" id="navHistory">Trade History</div>
+
+<div class="menu-item" id="navConsistency">Consistency</div>
+
+<div class="menu-item" id="navNews">News</div>
+
+<div class="menu-item" id="navSettings">Settings</div>
 
 </div>
 
 <div id="overlay"></div>
 
-<h1>📅 Consistency Tracker</h1>
+<h1>🔥 Consistency Tracker</h1>
 
-<p>Track your trading discipline and daily performance.</p>
+<p>Track your daily trading discipline.</p>
 
 <hr>
 
 <div class="signal-card">
 
-<h2>Coming Soon...</h2>
+<h2>Current Performance</h2>
 
-<p>✅ Daily Check-in</p>
+<p>Trading Days:
+<span id="days">0</span></p>
 
-<p>✅ Trading Calendar</p>
+<p>Consistency:
+<span id="consistency">0%</span></p>
 
-<p>✅ Win Streak</p>
-
-<p>✅ Missed Days</p>
-
-<p>✅ AI Consistency Score</p>
-
-<p>✅ Performance Graph</p>
+<button onclick="markToday()">✔ Mark Today Complete</button>
 
 </div>
+
+<script>
+
+let days=Number(localStorage.getItem("days"))||0;
+
+document.getElementById("days").innerHTML=days;
+
+document.getElementById("consistency").innerHTML=(days*2)+"%";
+
+function markToday(){
+
+days++;
+
+localStorage.setItem("days",days);
+
+location.reload();
+
+}
+
+</script>
 
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
 <script src="navigation.js"></script>
-
 </body>
 </html>
