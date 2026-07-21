@@ -43,23 +43,91 @@
 
 <div class="signal-card">
 
-<h2>Coming Soon...</h2>
+<h2>➕ Add Trade</h2>
 
-<p>This page will contain:</p>
+<input id="pair" type="text" placeholder="Pair (XAUUSD)"><br><br>
 
-<p>✅ Trade Entry</p>
+<input id="entry" type="number" placeholder="Entry Price"><br><br>
 
-<p>✅ Screenshots</p>
+<input id="sl" type="number" placeholder="Stop Loss"><br><br>
 
-<p>✅ Win/Loss</p>
+<input id="tp" type="number" placeholder="Take Profit"><br><br>
 
-<p>✅ AI Notes</p>
+<select id="result">
+    <option value="WIN">WIN</option>
+    <option value="LOSS">LOSS</option>
+</select>
 
-<p>✅ Emotion Tracker</p>
+<br><br>
 
-<p>✅ Learning Engine</p>
+<button onclick="saveTrade()">Save Trade</button>
 
 </div>
+
+<hr>
+
+<div class="signal-card">
+
+<h2>🤖 AI Learning Statistics</h2>
+
+<p>Total Trades:
+<span id="totalTrades">0</span></p>
+
+<p>Winning Trades:
+<span id="winningTrades">0</span></p>
+
+<p>Losing Trades:
+<span id="losingTrades">0</span></p>
+
+<p>Win Rate:
+<span id="winRate">0%</span></p>
+
+<p>Confidence Bonus:
+<span id="confidenceBonus">0%</span></p>
+
+</div>
+
+<script>
+
+function saveTrade(){
+
+const trade={
+
+pair:document.getElementById("pair").value,
+
+entry:document.getElementById("entry").value,
+
+sl:document.getElementById("sl").value,
+
+tp:document.getElementById("tp").value,
+
+result:document.getElementById("result").value
+
+};
+
+LearningEngine.learn(trade);
+
+updateStats();
+
+}
+
+function updateStats(){
+
+document.getElementById("totalTrades").innerHTML=LearningEngine.totalTrades || 0;
+
+document.getElementById("winningTrades").innerHTML=LearningEngine.winningTrades || 0;
+
+document.getElementById("losingTrades").innerHTML=LearningEngine.losingTrades || 0;
+
+document.getElementById("winRate").innerHTML=(LearningEngine.winRate || 0)+"%";
+
+document.getElementById("confidenceBonus").innerHTML=(LearningEngine.confidenceBonus || 0)+"%";
+
+}
+
+updateStats();
+
+</script>
 
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
