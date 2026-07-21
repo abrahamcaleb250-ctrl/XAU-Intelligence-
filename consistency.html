@@ -80,6 +80,38 @@ location.reload();
 
 </script>
 
+const calendar=document.getElementById("calendar");
+
+for(let i=1;i<=31;i++){
+
+const day=document.createElement("button");
+
+day.innerHTML=i;
+
+day.style.width="55px";
+
+day.style.height="55px";
+
+day.style.margin="5px";
+
+day.style.borderRadius="10px";
+
+day.style.fontSize="18px";
+
+day.style.fontWeight="900";
+
+day.style.background="#222";
+
+day.style.color="white";
+
+day.style.border="1px solid #444";
+
+calendar.appendChild(day);
+
+}
+
+</script>
+
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
 <script src="navigation.js"></script>
