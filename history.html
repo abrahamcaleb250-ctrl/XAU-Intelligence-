@@ -7,55 +7,70 @@
 
 <body>
 
-<!-- Floating Bubble -->
+<!-- Floating Menu -->
 <div id="menuBubble"></div>
 
-<!-- Hidden Navigation -->
+<!-- Side Menu -->
 <div id="sideMenu">
 
-    <div class="menu-item" id="navDashboard">Dashboard</div>
+<div class="menu-item" id="navDashboard">Dashboard</div>
 
-    <div class="menu-item" id="navJournal">Journal</div>
+<div class="menu-item" id="navJournal">Journal</div>
 
-    <div class="menu-item" id="navHistory">Trade History</div>
+<div class="menu-item" id="navHistory">Trade History</div>
 
-    <div class="menu-item" id="navConsistency">Consistency</div>
+<div class="menu-item" id="navConsistency">Consistency</div>
 
-    <div class="menu-item" id="navNews">News</div>
+<div class="menu-item" id="navNews">News</div>
 
-    <div class="menu-item" id="navSettings">Settings</div>
+<div class="menu-item" id="navSettings">Settings</div>
 
 </div>
 
 <div id="overlay"></div>
 
-<h1>📊 Trade History</h1>
+<h1>📈 Trade History</h1>
 
-<p>Every completed trade will be stored here automatically.</p>
+<p>Every trade saved by the AI appears here.</p>
 
 <hr>
 
 <div class="signal-card">
 
-<h2>Coming Soon...</h2>
+<h2>Saved Trades</h2>
 
-<p>✅ Entry Price</p>
+<div id="tradeHistory">
 
-<p>✅ Exit Price</p>
-
-<p>✅ Profit / Loss</p>
-
-<p>✅ Risk to Reward</p>
-
-<p>✅ AI Analysis</p>
-
-<p>✅ Export History</p>
+No trades yet...
 
 </div>
+
+</div>
+
+<script>
+
+const saved=JSON.parse(localStorage.getItem("LearningEngine"));
+
+if(saved){
+
+document.getElementById("tradeHistory").innerHTML=`
+
+<p><strong>Total Trades:</strong> ${saved.totalTrades}</p>
+
+<p><strong>Winning Trades:</strong> ${saved.winningTrades}</p>
+
+<p><strong>Losing Trades:</strong> ${saved.losingTrades}</p>
+
+<p><strong>Win Rate:</strong> ${saved.winRate}%</p>
+
+`;
+
+}
+
+</script>
 
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
 <script src="navigation.js"></script>
-
 </body>
 </html>
