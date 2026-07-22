@@ -120,3 +120,52 @@ if(saved){
 Object.assign(LearningEngine,JSON.parse(saved));
 
 }
+// ===============================
+// Consistency Tracker
+// ===============================
+
+LearningEngine.currentStreak = 0;
+LearningEngine.longestStreak = 0;
+LearningEngine.tradingDays = 0;
+LearningEngine.missedDays = 0;
+LearningEngine.completedDays = [];
+
+LearningEngine.markToday = function () {
+
+const today = new Date().toDateString();
+
+if (this.completedDays.includes(today)) {
+
+return;
+
+}
+
+this.completedDays.push(today);
+
+this.tradingDays++;
+
+this.currentStreak++;
+
+if (this.currentStreak > this.longestStreak) {
+
+this.longestStreak = this.currentStreak;
+
+}
+
+localStorage.setItem("LearningEngine", JSON.stringify(this));
+
+};
+
+LearningEngine.getConsistency = function () {
+
+if (this.tradingDays + this.missedDays === 0) return 0;
+
+return Math.round(
+
+(this.tradingDays /
+
+(this.tradingDays + this.missedDays)) * 100
+
+);
+
+};
