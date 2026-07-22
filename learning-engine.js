@@ -129,7 +129,30 @@ LearningEngine.longestStreak = 0;
 LearningEngine.tradingDays = 0;
 LearningEngine.missedDays = 0;
 LearningEngine.completedDays = JSON.parse(localStorage.getItem("completedDays")) || [];
-LearningEngine.markToday = function () {
+const today = new Date().toDateString();
+
+const lastTradeDay =
+localStorage.getItem("lastTradeDay");
+
+if(lastTradeDay){
+
+const lastDate = new Date(lastTradeDay);
+
+const currentDate = new Date(today);
+
+const diffDays =
+Math.floor(
+(currentDate - lastDate) /
+(1000*60*60*24)
+);
+
+if(diffDays > 1){
+
+this.currentStreak = 0;
+
+this.missedDays += (diffDays - 1);
+
+}
 
 const today = new Date().toDateString();
 
