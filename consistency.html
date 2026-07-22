@@ -272,6 +272,119 @@ document.getElementById("monthTitle").innerHTML=
 
 }
 
+function buildCalendar(){
+
+calendar.innerHTML="";
+
+const daysInMonth =
+new Date(currentYear,currentMonth+1,0).getDate();
+
+updateMonthTitle();
+
+for(let i=1;i<=daysInMonth;i++){
+
+const day=document.createElement("button");
+
+day.innerHTML=i;
+
+day.className="calendar-day";
+
+const dateString=
+new Date(currentYear,currentMonth,i).toDateString();
+
+if(completedDays.includes(dateString)){
+
+day.classList.add("completed");
+
+day.disabled=true;
+
+}
+
+const now=new Date();
+
+if(
+i===now.getDate() &&
+currentMonth===now.getMonth() &&
+currentYear===now.getFullYear()
+){
+
+day.classList.add("today");
+
+}
+
+if(
+i<now.getDate() &&
+currentMonth===now.getMonth() &&
+currentYear===now.getFullYear() &&
+!completedDays.includes(dateString)
+){
+
+day.classList.add("missed");
+
+}
+
+day.onclick=function(){
+
+if(completedDays.includes(dateString)) return;
+
+completedDays.push(dateString);
+
+tradingDays++;
+
+currentStreak++;
+
+if(currentStreak>longestStreak){
+
+longestStreak=currentStreak;
+
+}
+
+saveData();
+
+updateStats();
+
+buildCalendar();
+
+};
+
+calendar.appendChild(day);
+
+}
+
+}
+
+document.getElementById("prevMonth").onclick=function(){
+
+currentMonth--;
+
+if(currentMonth<0){
+
+currentMonth=11;
+
+currentYear--;
+
+}
+
+buildCalendar();
+
+};
+
+document.getElementById("nextMonth").onclick=function(){
+
+currentMonth++;
+
+if(currentMonth>11){
+
+currentMonth=0;
+
+currentYear++;
+
+}
+
+buildCalendar();
+
+};
+
 </script>
 
 <script src="database.js"></script>
