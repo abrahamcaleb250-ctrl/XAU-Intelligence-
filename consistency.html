@@ -143,7 +143,9 @@ updateMonthTitle();
 
 }
 
-for(let i=1;i<=31;i++){
+const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+for(let i=1;i<=daysInMonth;i++){
 
 const day=document.createElement("button");
 
@@ -157,9 +159,7 @@ LearningEngine.markToday();
 
 updateConsistency();
 
-this.style.background="#00C853";
-
-this.style.color="white";
+this.classList.add("completed");
 
 };
 
