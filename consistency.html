@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Consistency Tracker</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Consistency Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -12,308 +20,71 @@
 <div id="sideMenu">
 
 <div class="menu-item" id="navDashboard">Dashboard</div>
+
 <div class="menu-item" id="navJournal">Journal</div>
+
 <div class="menu-item" id="navHistory">Trade History</div>
+
 <div class="menu-item" id="navConsistency">Consistency</div>
+
 <div class="menu-item" id="navNews">News</div>
+
 <div class="menu-item" id="navSettings">Settings</div>
 
 </div>
 
 <div id="overlay"></div>
 
+<div class="page-container">
+
 <h1>🔥 Consistency Tracker</h1>
 
-<p>Build discipline one day at a time.</p>
+<p class="subtitle">
 
-<hr>
-
-<div class="signal-card">
-
-<h2>📊 Performance</h2>
-
-<p>Current Streak:
-<span id="currentStreak">0</span></p>
-
-<p>Longest Streak:
-<span id="longestStreak">0</span></p>
-
-<p>Trading Days:
-<span id="days">0</span></p>
-
-<p>Missed Days:
-<span id="missedDays">0</span></p>
-
-<p>Consistency:
-<span id="consistency">0%</span></p>
-
-</div>
-
-<hr>
-
-<div class="signal-card">
-
-<h2 id="monthTitle">📅 June 2026</h2>
-
-<div style="display:flex;justify-content:space-between;margin-bottom:20px;">
-
-<button onclick="previousMonth()">⬅</button>
-
-<button onclick="nextMonth()">➡</button>
-
-</div>
-
-<div id="calendar"></div>
-
-</div>
-
-<hr>
-
-<div class="signal-card">
-
-<h2>🥧 Consistency Chart</h2>
-
-<canvas id="consistencyChart" width="300" height="300"></canvas>
-
-</div>
-
-<hr>
-
-<div class="signal-card">
-
-<hr>
-
-<div class="signal-card">
-
-<h2>🏆 Achievements</h2>
-
-<div id="badges">
-
-<p>🥉 Beginner Trader</p>
-
-<p>🔒 More badges unlock as you stay consistent.</p>
-
-</div>
-
-</div>
-
-<h2>🤖 AI Reminder</h2>
-
-<p id="reminderText">
-
-You haven't missed any day.
+Your discipline creates your profits.
 
 </p>
 
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h3>Current Streak</h3>
+
+<h2 id="currentStreak">0</h2>
+
 </div>
 
-<script>
+<div class="stat-card">
 
-const calendar = document.getElementById("calendar");
+<h3>Longest Streak</h3>
 
-let currentMonth=new Date().getMonth();
+<h2 id="longestStreak">0</h2>
 
-let currentYear=new Date().getFullYear();
+</div>
 
-const months=[
-"January","February","March","April","May","June",
-"July","August","September","October","November","December"
-];
+<div class="stat-card">
 
-function updateMonthTitle(){
+<h3>Trading Days</h3>
 
-document.getElementById("monthTitle").innerHTML=
-"📅 "+months[currentMonth]+" "+currentYear;
+<h2 id="days">0</h2>
 
-calendar.innerHTML="";
+</div>
 
-const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
+<div class="stat-card">
 
-for(let i=1;i<=daysInMonth;i++){
+<h3>Missed Days</h3>
 
-const today=new Date();
+<h2 id="missedDays">0</h2>
 
-const currentDay=today.getDate();
+</div>
 
-if(
+<div class="stat-card">
 
-currentMonth===today.getMonth() &&
+<h3>Consistency</h3>
 
-currentYear===today.getFullYear()
+<h2 id="consistency">0%</h2>
 
-){
+</div>
 
-if(i<currentDay){
-
-day.classList.add("missed");
-
-}
-
-if(i===currentDay){
-
-day.classList.add("today");
-
-}
-
-day.innerHTML=i;
-
-day.className="calendar-day";
-const todayString =
-new Date(currentYear,currentMonth,i).toDateString();
-
-if(LearningEngine.completedDays.includes(todayString)){
-
-day.classList.add("completed");
-
-day.disabled=true;
-
-}
-
-day.onclick=function(){
-
-LearningEngine.markToday();
-
-updateConsistency();
-
-this.classList.add("completed");
-
-};
-
-calendar.appendChild(day);
-
-}
-
-function previousMonth(){
-
-currentMonth--;
-
-if(currentMonth<0){
-
-currentMonth=11;
-
-currentYear--;
-
-}
-
-updateMonthTitle();
-
-}
-
-function nextMonth(){
-
-currentMonth++;
-
-if(currentMonth>11){
-
-currentMonth=0;
-
-currentYear++;
-
-}
-
-updateMonthTitle();
-
-}
-
-const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-for(let i=1;i<=daysInMonth;i++){
-
-const day=document.createElement("button");
-
-day.innerHTML=i;
-
-day.className="calendar-day";
-
-day.onclick=function(){
-
-LearningEngine.markToday();
-
-updateConsistency();
-
-const canvas=document.getElementById("consistencyChart");
-
-const ctx=canvas.getContext("2d");
-
-function drawChart(){
-
-const percent=LearningEngine.getConsistency();
-
-ctx.clearRect(0,0,300,300);
-
-ctx.beginPath();
-
-ctx.moveTo(150,150);
-
-ctx.fillStyle="#00C853";
-
-ctx.arc(
-150,
-150,
-120,
--Math.PI/2,
-(percent/100)*2*Math.PI-Math.PI/2
-);
-
-ctx.fill();
-
-ctx.beginPath();
-
-ctx.moveTo(150,150);
-
-ctx.fillStyle="#D50000";
-
-ctx.arc(
-150,
-150,
-120,
-(percent/100)*2*Math.PI-Math.PI/2,
-1.5*Math.PI
-);
-
-ctx.fill();
-
-ctx.fillStyle="white";
-
-ctx.font="bold 28px Arial";
-
-ctx.fillText(percent+"%",120,160);
-
-}
-
-drawChart();
-
-this.classList.add("completed");
-
-};
-
-calendar.appendChild(day);
-
-}
-
-function updateConsistency(){
-
-document.getElementById("currentStreak").innerHTML=LearningEngine.currentStreak;
-
-document.getElementById("longestStreak").innerHTML=LearningEngine.longestStreak;
-
-document.getElementById("days").innerHTML=LearningEngine.tradingDays;
-
-document.getElementById("missedDays").innerHTML=LearningEngine.missedDays;
-
-document.getElementById("consistency").innerHTML=
-
-LearningEngine.getConsistency()+"%";
-
-}
-
-updateConsistency();
-updateMonthTitle();
-
-</script>
-
-<script src="database.js"></script>
-<script src="learning-engine.js"></script>
-<script src="navigation.js"></script>
-</body>
-</html>
+</div>
