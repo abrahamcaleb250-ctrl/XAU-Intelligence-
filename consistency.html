@@ -142,6 +142,16 @@ day.classList.add("today");
 day.innerHTML=i;
 
 day.className="calendar-day";
+const todayString =
+new Date(currentYear,currentMonth,i).toDateString();
+
+if(LearningEngine.completedDays.includes(todayString)){
+
+day.classList.add("completed");
+
+day.disabled=true;
+
+}
 
 day.onclick=function(){
 
