@@ -109,6 +109,30 @@ function updateMonthTitle(){
 document.getElementById("monthTitle").innerHTML=
 "📅 "+months[currentMonth]+" "+currentYear;
 
+calendar.innerHTML="";
+
+const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
+
+for(let i=1;i<=daysInMonth;i++){
+
+const day=document.createElement("button");
+
+day.innerHTML=i;
+
+day.className="calendar-day";
+
+day.onclick=function(){
+
+LearningEngine.markToday();
+
+updateConsistency();
+
+this.classList.add("completed");
+
+};
+
+calendar.appendChild(day);
+
 }
 
 function previousMonth(){
