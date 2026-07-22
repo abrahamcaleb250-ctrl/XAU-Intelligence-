@@ -385,6 +385,134 @@ buildCalendar();
 
 };
 
+updateStats();
+
+function drawChart(){
+
+const canvas=document.getElementById("consistencyChart");
+
+const ctx=canvas.getContext("2d");
+
+ctx.clearRect(0,0,320,320);
+
+let total=tradingDays+missedDays;
+
+let percent=0;
+
+if(total>0){
+
+percent=tradingDays/total;
+
+}
+
+ctx.beginPath();
+
+ctx.moveTo(160,160);
+
+ctx.fillStyle="#00C853";
+
+ctx.arc(
+
+160,
+
+160,
+
+120,
+
+-Math.PI/2,
+
+(percent*2*Math.PI)-Math.PI/2
+
+);
+
+ctx.fill();
+
+ctx.beginPath();
+
+ctx.moveTo(160,160);
+
+ctx.fillStyle="#D50000";
+
+ctx.arc(
+
+160,
+
+160,
+
+120,
+
+(percent*2*Math.PI)-Math.PI/2,
+
+1.5*Math.PI
+
+);
+
+ctx.fill();
+
+ctx.beginPath();
+
+ctx.fillStyle="#111";
+
+ctx.arc(160,160,70,0,2*Math.PI);
+
+ctx.fill();
+
+ctx.fillStyle="white";
+
+ctx.font="bold 28px Arial";
+
+ctx.fillText(
+
+Math.round(percent*100)+"%",
+
+125,
+
+170
+
+);
+
+}
+
+drawChart();
+
+if(currentStreak>=7){
+
+document.getElementById("badges").innerHTML+=
+
+"<div class='badge'>🥈 7 Day Streak</div>";
+
+}
+
+if(currentStreak>=30){
+
+document.getElementById("badges").innerHTML+=
+
+"<div class='badge'>🥇 30 Day Master</div>";
+
+}
+
+if(currentStreak>=100){
+
+document.getElementById("badges").innerHTML+=
+
+"<div class='badge'>💎 100 Day Legend</div>";
+
+}
+
+if(missedDays>0){
+
+document.getElementById("reminderText").innerHTML=
+
+"⚠️ You have missed "+missedDays+" trading day(s). Stay disciplined.";
+
+}else{
+
+document.getElementById("reminderText").innerHTML=
+
+"✅ Excellent! Keep your streak alive.";
+
+}
+
 </script>
 
 <script src="database.js"></script>
