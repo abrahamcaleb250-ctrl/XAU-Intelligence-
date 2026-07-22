@@ -203,6 +203,77 @@ The AI will analyse your trading discipline and give advice here.
 
 </div>
 
+<script>
+
+const calendar = document.getElementById("calendar");
+
+let today = new Date();
+
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+const months = [
+"January","February","March","April","May","June",
+"July","August","September","October","November","December"
+];
+
+let completedDays = JSON.parse(localStorage.getItem("completedDays")) || [];
+
+let currentStreak = Number(localStorage.getItem("currentStreak")) || 0;
+
+let longestStreak = Number(localStorage.getItem("longestStreak")) || 0;
+
+let tradingDays = Number(localStorage.getItem("tradingDays")) || 0;
+
+let missedDays = Number(localStorage.getItem("missedDays")) || 0;
+
+function saveData(){
+
+localStorage.setItem("completedDays",JSON.stringify(completedDays));
+
+localStorage.setItem("currentStreak",currentStreak);
+
+localStorage.setItem("longestStreak",longestStreak);
+
+localStorage.setItem("tradingDays",tradingDays);
+
+localStorage.setItem("missedDays",missedDays);
+
+}
+
+function updateStats(){
+
+document.getElementById("currentStreak").innerHTML=currentStreak;
+
+document.getElementById("longestStreak").innerHTML=longestStreak;
+
+document.getElementById("days").innerHTML=tradingDays;
+
+document.getElementById("missedDays").innerHTML=missedDays;
+
+let total=tradingDays+missedDays;
+
+let percent=0;
+
+if(total>0){
+
+percent=Math.round((tradingDays/total)*100);
+
+}
+
+document.getElementById("consistency").innerHTML=percent+"%";
+
+}
+
+function updateMonthTitle(){
+
+document.getElementById("monthTitle").innerHTML=
+"📅 "+months[currentMonth]+" "+currentYear;
+
+}
+
+</script>
+
 <script src="database.js"></script>
 
 <script src="learning-engine.js"></script>
