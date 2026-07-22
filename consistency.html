@@ -87,6 +87,54 @@ You haven't missed any day.
 
 const calendar = document.getElementById("calendar");
 
+let currentMonth=new Date().getMonth();
+
+let currentYear=new Date().getFullYear();
+
+const months=[
+"January","February","March","April","May","June",
+"July","August","September","October","November","December"
+];
+
+function updateMonthTitle(){
+
+document.getElementById("monthTitle").innerHTML=
+"📅 "+months[currentMonth]+" "+currentYear;
+
+}
+
+function previousMonth(){
+
+currentMonth--;
+
+if(currentMonth<0){
+
+currentMonth=11;
+
+currentYear--;
+
+}
+
+updateMonthTitle();
+
+}
+
+function nextMonth(){
+
+currentMonth++;
+
+if(currentMonth>11){
+
+currentMonth=0;
+
+currentYear++;
+
+}
+
+updateMonthTitle();
+
+}
+
 for(let i=1;i<=31;i++){
 
 const day=document.createElement("button");
