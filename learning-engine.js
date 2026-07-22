@@ -163,6 +163,10 @@ return;
 }
 
 this.completedDays.push(today);
+localStorage.setItem(
+"lastTradeDay",
+today
+);
 
 this.tradingDays++;
 
