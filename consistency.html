@@ -215,6 +215,58 @@ LearningEngine.markToday();
 
 updateConsistency();
 
+const canvas=document.getElementById("consistencyChart");
+
+const ctx=canvas.getContext("2d");
+
+function drawChart(){
+
+const percent=LearningEngine.getConsistency();
+
+ctx.clearRect(0,0,300,300);
+
+ctx.beginPath();
+
+ctx.moveTo(150,150);
+
+ctx.fillStyle="#00C853";
+
+ctx.arc(
+150,
+150,
+120,
+-Math.PI/2,
+(percent/100)*2*Math.PI-Math.PI/2
+);
+
+ctx.fill();
+
+ctx.beginPath();
+
+ctx.moveTo(150,150);
+
+ctx.fillStyle="#D50000";
+
+ctx.arc(
+150,
+150,
+120,
+(percent/100)*2*Math.PI-Math.PI/2,
+1.5*Math.PI
+);
+
+ctx.fill();
+
+ctx.fillStyle="white";
+
+ctx.font="bold 28px Arial";
+
+ctx.fillText(percent+"%",120,160);
+
+}
+
+drawChart();
+
 this.classList.add("completed");
 
 };
