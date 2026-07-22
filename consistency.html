@@ -115,7 +115,29 @@ const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
 
 for(let i=1;i<=daysInMonth;i++){
 
-const day=document.createElement("button");
+const today=new Date();
+
+const currentDay=today.getDate();
+
+if(
+
+currentMonth===today.getMonth() &&
+
+currentYear===today.getFullYear()
+
+){
+
+if(i<currentDay){
+
+day.classList.add("missed");
+
+}
+
+if(i===currentDay){
+
+day.classList.add("today");
+
+}
 
 day.innerHTML=i;
 
