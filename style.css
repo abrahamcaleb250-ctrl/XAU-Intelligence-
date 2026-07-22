@@ -488,3 +488,74 @@ button:hover{
 background:#FFD700;
 
 }
+/* ================================= */
+/* Consistency Calendar */
+/* ================================= */
+
+#calendar{
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:14px;
+
+margin-top:20px;
+
+}
+
+.calendar-day{
+
+height:90px;
+
+font-size:28px;
+
+font-weight:900;
+
+border-radius:18px;
+
+background:#1A1A1A;
+
+color:#FFFFFF;
+
+border:2px solid #333333;
+
+cursor:pointer;
+
+transition:0.25s;
+
+}
+
+.calendar-day:hover{
+
+transform:scale(1.05);
+
+border:2px solid gold;
+
+background:#2A2A2A;
+
+}
+
+.calendar-day.completed{
+
+background:#00C853;
+
+color:white;
+
+}
+
+.calendar-day.missed{
+
+background:#D50000;
+
+color:white;
+
+}
+
+.calendar-day.today{
+
+border:3px solid gold;
+
+box-shadow:0 0 18px gold;
+
+}
