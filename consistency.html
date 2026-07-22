@@ -12,15 +12,10 @@
 <div id="sideMenu">
 
 <div class="menu-item" id="navDashboard">Dashboard</div>
-
 <div class="menu-item" id="navJournal">Journal</div>
-
 <div class="menu-item" id="navHistory">Trade History</div>
-
 <div class="menu-item" id="navConsistency">Consistency</div>
-
 <div class="menu-item" id="navNews">News</div>
-
 <div class="menu-item" id="navSettings">Settings</div>
 
 </div>
@@ -29,88 +24,64 @@
 
 <h1>🔥 Consistency Tracker</h1>
 
-<p>Track your daily trading discipline.</p>
+<p>Build discipline one day at a time.</p>
 
 <hr>
 
 <div class="signal-card">
 
-<h2>Current Performance</h2>
-<h3>📅 Monthly Calendar</h3>
+<h2>📊 Performance</h2>
 
-<div id="calendar"></div>
+<p>Current Streak:
+<span id="currentStreak">0</span></p>
 
-<br>
-
-<p>
-🟢 = Completed
-&nbsp;&nbsp;
-🔴 = Missed
-&nbsp;&nbsp;
-⚪ = Today
-</p>
+<p>Longest Streak:
+<span id="longestStreak">0</span></p>
 
 <p>Trading Days:
 <span id="days">0</span></p>
 
+<p>Missed Days:
+<span id="missedDays">0</span></p>
+
 <p>Consistency:
 <span id="consistency">0%</span></p>
 
-<button onclick="markToday()">✔ Mark Today Complete</button>
+</div>
+
+<hr>
+
+<div class="signal-card">
+
+<h2>📅 Monthly Calendar</h2>
+
+<div id="calendar"></div>
 
 </div>
 
-<script>
+<hr>
 
-let days=Number(localStorage.getItem("days"))||0;
+<div class="signal-card">
 
-document.getElementById("days").innerHTML=days;
+<h2>🥧 Consistency Chart</h2>
 
-document.getElementById("consistency").innerHTML=(days*2)+"%";
+<canvas id="consistencyChart"></canvas>
 
-function markToday(){
+</div>
 
-days++;
+<hr>
 
-localStorage.setItem("days",days);
+<div class="signal-card">
 
-location.reload();
+<h2>🤖 AI Reminder</h2>
 
-}
+<p id="reminderText">
 
-</script>
+You haven't missed any day.
 
-const calendar=document.getElementById("calendar");
+</p>
 
-for(let i=1;i<=31;i++){
-
-const day=document.createElement("button");
-
-day.innerHTML=i;
-
-day.style.width="55px";
-
-day.style.height="55px";
-
-day.style.margin="5px";
-
-day.style.borderRadius="10px";
-
-day.style.fontSize="18px";
-
-day.style.fontWeight="900";
-
-day.style.background="#222";
-
-day.style.color="white";
-
-day.style.border="1px solid #444";
-
-calendar.appendChild(day);
-
-}
-
-</script>
+</div>
 
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
