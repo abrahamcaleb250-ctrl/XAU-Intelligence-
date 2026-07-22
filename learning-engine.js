@@ -152,6 +152,7 @@ this.longestStreak = this.currentStreak;
 }
 
 localStorage.setItem("LearningEngine", JSON.stringify(this));
+localStorage.setItem("completedDays", JSON.stringify(this.completedDays));
 
 };
 
