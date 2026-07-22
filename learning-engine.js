@@ -128,8 +128,7 @@ LearningEngine.currentStreak = 0;
 LearningEngine.longestStreak = 0;
 LearningEngine.tradingDays = 0;
 LearningEngine.missedDays = 0;
-LearningEngine.completedDays = [];
-
+LearningEngine.completedDays = JSON.parse(localStorage.getItem("completedDays")) || [];
 LearningEngine.markToday = function () {
 
 const today = new Date().toDateString();
