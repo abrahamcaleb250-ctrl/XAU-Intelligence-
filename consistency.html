@@ -83,6 +83,54 @@ You haven't missed any day.
 
 </div>
 
+<script>
+
+const calendar = document.getElementById("calendar");
+
+for(let i=1;i<=31;i++){
+
+const day=document.createElement("button");
+
+day.innerHTML=i;
+
+day.className="calendar-day";
+
+day.onclick=function(){
+
+LearningEngine.markToday();
+
+updateConsistency();
+
+this.style.background="#00C853";
+
+this.style.color="white";
+
+};
+
+calendar.appendChild(day);
+
+}
+
+function updateConsistency(){
+
+document.getElementById("currentStreak").innerHTML=LearningEngine.currentStreak;
+
+document.getElementById("longestStreak").innerHTML=LearningEngine.longestStreak;
+
+document.getElementById("days").innerHTML=LearningEngine.tradingDays;
+
+document.getElementById("missedDays").innerHTML=LearningEngine.missedDays;
+
+document.getElementById("consistency").innerHTML=
+
+LearningEngine.getConsistency()+"%";
+
+}
+
+updateConsistency();
+
+</script>
+
 <script src="database.js"></script>
 <script src="learning-engine.js"></script>
 <script src="navigation.js"></script>
