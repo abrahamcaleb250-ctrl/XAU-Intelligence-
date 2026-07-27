@@ -3893,6 +3893,58 @@ function updateDashboard() {
 
     }
 
+// =====================================
+// Live Trend Meter Updates
+// =====================================
+
+// 4H
+document.getElementById("h4Bull").innerText =
+trendData.h4.bullish + "%";
+document.getElementById("h4Bear").innerText =
+trendData.h4.bearish + "%";
+
+// 1H
+document.getElementById("h1Bull").innerText =
+trendData.h1.bullish + "%";
+document.getElementById("h1Bear").innerText =
+trendData.h1.bearish + "%";
+
+// 15M
+document.getElementById("m15Bull").innerText =
+trendData.m15.bullish + "%";
+document.getElementById("m15Bear").innerText =
+trendData.m15.bearish + "%";
+
+// 5M
+document.getElementById("m5Bull").innerText =
+trendData.m5.bullish + "%";
+document.getElementById("m5Bear").innerText =
+trendData.m5.bearish + "%";
+
+// Master Bias
+const masterBias = calculateMasterBias();
+
+document.getElementById("masterBiasStatus").innerText =
+masterBias.direction;
+
+document.getElementById("masterBull").innerText =
+masterBias.bullish + "%";
+
+document.getElementById("masterBear").innerText =
+masterBias.bearish + "%";
+
+document.getElementById("masterConfidence").innerText =
+Math.max(masterBias.bullish, masterBias.bearish) + "%";
+
+document.getElementById("masterReason").innerText =
+"Strongest timeframe: " + masterBias.strongestTimeframe;
+
+document.getElementById("masterBullFill").style.width =
+masterBias.bullish + "%";
+
+document.getElementById("masterBearFill").style.width =
+masterBias.bearish + "%";
+
 }
 
 // =====================================
