@@ -70,13 +70,15 @@ hr {
 }
 
 .bullish-fill {
-    width: 72%;
+    width: 0%;
     background: #00c853;
+    transition: width 0.5s ease;
 }
 
 .bearish-fill {
-    width: 28%;
+    width: 0%;
     background: #d50000;
+    transition: width 0.5s ease;
 }
 
 /* Master Bias */
