@@ -3894,6 +3894,22 @@ function updateDashboard() {
     }
 
 // =====================================
+// Timeframe Meter Fill
+// =====================================
+
+document.getElementById("h4BullFill").style.width = trendData.h4.bullish + "%";
+document.getElementById("h4BearFill").style.width = trendData.h4.bearish + "%";
+
+document.getElementById("h1BullFill").style.width = trendData.h1.bullish + "%";
+document.getElementById("h1BearFill").style.width = trendData.h1.bearish + "%";
+
+document.getElementById("m15BullFill").style.width = trendData.m15.bullish + "%";
+document.getElementById("m15BearFill").style.width = trendData.m15.bearish + "%";
+
+document.getElementById("m5BullFill").style.width = trendData.m5.bullish + "%";
+document.getElementById("m5BearFill").style.width = trendData.m5.bearish + "%";
+
+// =====================================
 // Live Trend Meter Updates
 // =====================================
 
