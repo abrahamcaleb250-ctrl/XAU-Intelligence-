@@ -3186,11 +3186,13 @@ async function fetchLivePrice() {
 
     try {
 
-        const res = await fetch("https://xaus.com/api/v1/spot");
+        const response = await fetch(
+"https://api.metals.dev/v1/latest?api_key=LE2RF5CY6CUNEWZZZTEY369ZZZTEY&currency=USD&unit=toz"
+);
 
-        const data = await res.json();
+const data = await response.json();
 
-        const price = Number(data.spot_usd_oz);
+const price = Number(data.metals.gold.price);
 
         // ==========================
         // Update Price Engine
